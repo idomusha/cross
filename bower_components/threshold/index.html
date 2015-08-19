@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>threshold - manages page width change</title>
+
+		<link href="dist/threshold.css" rel="stylesheet">
+		<link href="dist/demo.css" rel="stylesheet">
+	</head>
+	<body>
+		<header class="width-full">
+			<div class="width-fixed">
+				<span class="show-x-large">x-large</span>
+				<span class="show-large">large</span>
+				<span class="show-medium">medium</span>
+				<span class="show-small">small</span>
+				<span class="show-x-small">x-small</span>
+				<span class="show-mobile">mobile</span>
+			</div>
+		</header>
+		<div class="width-full">
+			<div class="width-fixed" id="console">
+				&nbsp
+			</div>
+		</div>
+		<footer class="width-full">
+			<div class="width-fixed">
+				&nbsp
+			</div>
+		</footer>
+		<script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script>!window.jQuery && document.write('<script src="bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
+		<script src="dist/threshold.js"></script>
+		<script>
+			$(function() {
+
+				Threshold({
+                    widths: {
+						'x-large': '1480px',
+						'large': '1360px',
+						'medium': '1220px',
+						'small': '920px',
+						'x-small': '740px',
+						'mobile': '100%',
+                    }
+                });
+
+				$(window).data('Threshold').after('mobile', function() {
+					$('#console').append('<p>[mobile]</p>');
+				});
+                $(window).data('Threshold').after('x-small', function() {
+					$('#console').append('<p>[x-small] an awesome callback!</p>');
+				});
+                $(window).data('Threshold').after('x-small', function() {
+                    $('#console').append('<p>[x-small] an another awesome callback!</p>');
+                });
+				$(window).data('Threshold').after(['large', 'x-large'], function() {
+					$('#console').append('<p>[large] OR [x-large] callback for window width >= 1360px</p>');
+				});
+				$(window).data('Threshold').after('all', function() {
+					$('#console').append('<p>[all] callback for all thresholds</p>');
+				});
+
+			});
+		</script>
+	</body>
+</html>

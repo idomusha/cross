@@ -1,0 +1,39 @@
+{
+  "name": "both",
+  "main": "src/js/both.js",
+  "version": "0.2.0",
+  "homepage": "https://github.com/idomusha/both",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/idomusha/both"
+  },
+  "authors": [
+    "idomusha <idomusha@gmail.com>"
+  ],
+  "description": "detects in real time user interaction type (Mouse or Touch) and switches linked events",
+  "keywords": [
+    "interaction",
+    "mouse",
+    "touch",
+    "jquery"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "index.html",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "_release": "0.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.0",
+    "commit": "5b40e17719d91304a6f5a3644773404863cff7e3"
+  },
+  "_source": "git://github.com/idomusha/both.git",
+  "_target": "~0.2.0",
+  "_originalSource": "both"
+}

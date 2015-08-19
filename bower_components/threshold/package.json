@@ -1,0 +1,41 @@
+{
+  "name": "threshold",
+  "version": "0.3.1",
+  "description": "manages page width change",
+  "keywords": [
+    "media-queries",
+    "width",
+    "callback",
+    "jquery"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idomusha/threshold.git"
+  },
+  "bugs": {
+    "url": "https://github.com/idomusha/threshold/issues"
+  },
+  "author": {
+    "name": "idomusha",
+    "email": "iodmusha@gmail.com",
+    "url": "https://github.com/idomusha"
+  },
+  "homepage": "https://github.com/idomusha/threshold",
+  "contributors": [
+    {
+      "name": "idomusha",
+      "email": "idomusha@gmail.com",
+      "url": "https://github.com/idomusha"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "matchdep": "~0.3.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-less": "~1.0.1",
+    "grunt-autoprefixer": "~3.0.3",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}

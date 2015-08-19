@@ -1,0 +1,30 @@
+{
+  "name": "cross",
+  "version": "0.1.0-alpha",
+  "homepage": "https://github.com/idomusha/cross",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/idomusha/cross"
+  },
+  "authors": [
+    "idomusha <idomusha@gmail.com>"
+  ],
+  "description": "manages page width change",
+  "main": "src/js/cross.js",
+  "keywords": [
+    "media-queries",
+    "width",
+    "callback",
+    "jquery"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "CHANGELOG.md",
+    "CONTRIBUTING.md"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7",
+    "both": "~0.2.0",
+    "threshold": "~0.3.1"
+  }
+}

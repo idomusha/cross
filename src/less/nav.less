@@ -1,0 +1,207 @@
+/* ==========================================================================
+ * NAV
+ * ========================================================================== */
+@submenu-border-size: 1px;
+
+/* Menu
+ * ========================================================================== */
+
+[role="menubar"] {
+  list-style: none;
+  [role="presentation"] {
+    position: relative;
+    list-style: none;
+  }
+  > [role="presentation"] {
+    text-align: center;
+    [role="menuitem"] {
+      background-color: transparent;
+      margin: 0;
+      padding: @padding-small;
+      border: 0 none;
+      font-weight: 100;
+      font-size: 14px;
+      font-size: 1.4rem;
+      line-height: 1em;
+      font-family: @font-roboto;
+      color: @color-grey-eclipse;
+      text-transform: uppercase;
+      width: 100%;
+      text-decoration: none;
+
+      display: inline-block;
+    }
+    > [role="menuitem"] > span {
+      display: inline-block;
+      line-height: 3rem;
+      position: relative;
+      /*&::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 0.3rem;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }*/
+    }
+    @color-active: @color-red-fireEngine;
+    > [role="menuitem"][aria-selected="true"] span::after,
+    > [role="menuitem"].expanded span::after {
+      background-color: @color-active;
+    }
+    [role=menu] [role="menuitem"][aria-selected="true"] span {
+      color: @color-active;
+    }
+  }
+  [role=menu] {
+    z-index: @zindex-menu;
+    position: absolute;
+    min-width: 100%;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid @color-grey-light;
+    padding: 0 4rem;
+    [role="presentation"] {
+      [role="menuitem"] {
+        padding: @padding-large 0;
+        border-top: @border-default;
+        span {
+
+        }
+        small {
+          font-weight: 400;
+          font-size: 1.1rem;
+          line-height: 1em;
+          font-family: @font-arial;
+          text-transform: none;
+          display: block;
+        }
+      }
+      &:first-child [role="menuitem"] {
+        border-top: 0 none;
+      }
+    }
+  }
+}
+
+
+/* Burger menu button
+ * ========================================================================== */
+
+.toggle {
+  height: 60px;
+  width: 60px;
+  overflow: hidden;
+  background-color: #fff;
+  border-bottom: 1px solid transparent;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  &:before,
+  &:after {
+    display: block;
+    content: '.';
+    overflow: hidden;
+
+    text-indent: 200%;
+    white-space: nowrap;
+  }
+  &:before,
+  &:after,
+  .toggle-bar {
+    width: 30px;
+    height: 3px;
+    margin-top: -1px;
+    margin-left: -16px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    background: #000;
+
+    transition: 0.2s cubic-bezier(0.770, 0.000, 0.175, 1.000);
+  }
+  &:before {
+    transform: translateY(-9px);
+  }
+  &:after {
+    transform: translateY(9px);
+  }
+  // This should prolly be triggered by JS
+  /*&:hover,
+  &:active,
+  &:focus*/
+  &.opened {
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after,
+    .toggle-bar {
+      transform: rotate(-45deg);
+    }
+    .toggle-bar {
+      opacity: 0;
+    }
+  }
+}
+
+@media @screen-max-mobile {
+  .toggle{
+    display: block;
+  }
+  [role="menubar"] {
+    z-index: @zindex-offcanvas-nav;
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 260px;
+    height: 100%;
+    min-height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    //background-color: rgba(255,255,255, 0.85);
+    display: block;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.95);
+    > [role="presentation"] {
+      display: block;
+      [role="menuitem"] {
+        text-align: left;
+        padding: @padding-small 4rem;
+        font-weight: 600;
+        font-size: 2.4rem;
+        line-height: 1em;
+        font-family: @font-roboto;
+      }
+      >  [role="menuitem"] {
+        border-bottom: 1px solid @color-grey-light;
+      }
+    }
+    [role="menu"] {
+      position: relative;
+      background-color: transparent;
+      border: 0 none;
+      border-bottom: 1px solid @color-grey-light;
+      [role="presentation"] [role="menuitem"] {
+        font-weight: 100;
+        font-size: 1.8rem;
+        line-height: 1em;
+        font-family: @font-roboto;
+      }
+    }
+  }
+  header[role="banner"] .header-top,
+  [role="menubar"].off-canvas {
+    transition: transform 0.3s ease;
+  }
+  .menu-on{
+    header[role="banner"] .header-top,
+    [role="menubar"].off-canvas {
+      transform: translate3d(260px, 0, 0);
+    }
+  }
+
+}
