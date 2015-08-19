@@ -140,7 +140,7 @@
       _this.window = $(window);
       _this.$html = $('html');
       _this.$nav = $(_this.element);
-      _this.button = Private.define(_this.button);
+      _this.$button = Private.define(_this.settings.button);
       _this.$collapsibleMenuItems = _this.$nav.children('[role="presentation"]').children('[role="menuitem"]').filter(function() {
         return $(this).next('[role="menu"]').length;
       });
@@ -152,6 +152,11 @@
     // Bind events that trigger methods
     bindEvents: function() {
       var _this = this;
+
+      _this.$button.on('click' + '.' + _this._name, function() {
+        _this.$html.toggleClass('menu-on');
+        _this.$button.toggleClass('opened');
+      });
 
       _this.window.on('resize' + '.' + _this._name, function() {
         _this.set();
@@ -195,6 +200,8 @@
     // Unbind events that trigger methods
     unbindEvents: function() {
       var _this = this;
+
+      _this.$button.off('click' + '.' + _this._name);
 
       _this.window.off('resize' + '.' + _this._name);
 
@@ -257,7 +264,7 @@
 
       $(window).data('Threshold').after('all', function() {
         _this.$html.removeClass('menu-on');
-        $('#toggleNav').removeClass('opened');
+        _this.$button.removeClass('opened');
       });
 
     }
