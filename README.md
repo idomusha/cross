@@ -1,12 +1,15 @@
-#threshold
+#cross
 
 ## manages page width change
 
 ## Demo
 
-[See Threshold in action](http://idomusha.github.io/threshold/)
+[See Cross in action](http://idomusha.github.io/cross/)
 
 ## Usage
+
+#[WARNING] This plugin is not ready yet!
+(be patient) :)
 
 1. Include jQuery:
 
@@ -17,13 +20,13 @@
 2. Include plugin's code:
 
 	```html
-	<script src="dist/threshold.min.js"></script>
+	<script src="dist/cross.min.js"></script>
 	```
 
 3. Call the plugin:
 
 	```javascript
-	Threshold();
+	$('[role="menubar"]').cross();
 	```
 
 4. Declare callbacks (whenever):
