@@ -760,7 +760,7 @@
       });
 
       $(window).data('Threshold').after(['x-small', 'small', 'medium', 'large', 'x-large'], function() {
-        console.log(size + ': mousenter ON');
+        console.log(_this.width + ': mousenter ON');
 
         _this.$collapsiblePresentations.on('mouseenter' + '.' + _this._name, function() {
           _this.menuitemMouseenter($(this));
