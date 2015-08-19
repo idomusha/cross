@@ -217,7 +217,7 @@ header [role="menubar"] {
   background-color: #5b162d;
   text-align: center;
 }
-header [role="menubar"] > [role="presentation"] [role="menuitem"] {
+header [role="menubar"] > [role="presentation"] > [role="menuitem"] {
   color: #fff;
 }
 @media screen and (max-width:1599px) {
