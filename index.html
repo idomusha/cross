@@ -165,8 +165,15 @@
 		You can use an another device detection.
 		In that case, define yourself the device variable:
 
+		$('[role="menubar"]').cross({
+
+			// device type ('desktop', 'tablet' or 'mobile')
+			device: '',
+
+		});
+
 		-->
-		<script src="bower_components/devicejs/lib/device.min.js',"></script>
+		<script src="bower_components/devicejs/lib/device.min.js"></script>
 
 		<script src="dist/cross.js"></script>
 		<script>
