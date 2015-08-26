@@ -170,9 +170,9 @@ Cross uses semantic elements and attributes, as well as microdata and WAI-ARIA.
 
 ## Dependencies
 Cross uses:
-	- [devicejs](http://matthewhudson.me/projects/device.js/) [OPTIONAL]
-	- [both](https://github.com/idomusha/both)
-	- [threshold](https://github.com/idomusha/threshold)
+- [devicejs](http://matthewhudson.me/projects/device.js/) [OPTIONAL]
+- [both](https://github.com/idomusha/both)
+- [threshold](https://github.com/idomusha/threshold)
 
 
 ## You can also grab Both using bower:
