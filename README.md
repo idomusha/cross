@@ -177,7 +177,7 @@ Cross uses:
 
 ## You can also grab Both using bower:
 ```
-	bower install threshold --save
+	bower install cross --save
 ```
 
 #### Authors
