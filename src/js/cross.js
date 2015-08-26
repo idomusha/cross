@@ -3,7 +3,6 @@
   'use strict';
 
   var pluginName = 'cross';
-  var debug;
 
   function Plugin(element, options) {
 
@@ -30,16 +29,42 @@
   $.extend(Plugin.prototype, {
 
     init: function() {
+      var _this = this;
+      _this.devices = [
+        'desktop',
+        'tablet',
+        'mobile',
+      ];
+
+      if (_this.devices.indexOf(_this.settings.device) > -1) {
+        Both.options = {
+          device: _this.settings.device,
+        };
+      } else {
+        if (device.tablet()) {
+          Both.options = {
+            device: 'tablet',
+          };
+
+          $('meta[name="viewport"]').attr('content', 'width=920');
+        } else if (device.mobile()) {
+          Both.options = {
+            device: 'mobile',
+          };
+
+          $('meta[name="viewport"]').attr('content', 'width=device-width, initial-scale=1.0');
+        }
+      }
+
+      _this.buildCache();
+
+      // init media-queries manager plugin
+      Threshold({
+        widths: _this.settings.widths,
+      });
 
       // init interaction types manager plugin
       Both.init();
-
-      // init media-queries manager plugin
-      Threshold();
-
-      var _this = this;
-      _this.buildCache();
-      _this.bindEvents();
 
       //_this.callbacks = {};
 
@@ -119,9 +144,10 @@
         _this.bFirstShow = false;
       };
 
-      // init interaction types manager plugin
-      Both.start();
+      // bind events, and then init interaction types manager plugin
+      _this.bindEvents(Both.start);
 
+      _this.start();
     },
 
     // Remove plugin instance completely
@@ -141,16 +167,20 @@
       _this.$html = $('html');
       _this.$nav = $(_this.element);
       _this.$button = Private.define(_this.settings.button);
-      _this.$collapsibleMenuItems = _this.$nav.children('[role="presentation"]').children('[role="menuitem"]').filter(function() {
+      _this.$collapsibleMenuItems = _this.$nav
+        .children('[role="presentation"]')
+        .children('[role="menuitem"]')
+        .filter(function() {
         return $(this).next('[role="menu"]').length;
       });
+
       _this.$collapsiblePresentations = _this.$collapsibleMenuItems.parent('[role="presentation"]');
       _this.window = $(window);
       _this.$html = $('html');
     },
 
     // Bind events that trigger methods
-    bindEvents: function() {
+    bindEvents: function(c) {
       var _this = this;
 
       _this.$button.on('click' + '.' + _this._name, function() {
@@ -158,9 +188,9 @@
         _this.$button.toggleClass('opened');
       });
 
-      _this.window.on('resize' + '.' + _this._name, function() {
-        _this.set();
-      });
+      /*_this.window.on('resize' + '.' + _this._name, function() {
+        _this.reset();
+      });*/
 
       // touch actions
       Both.store('touch', _this.$collapsibleMenuItems, 'touchend' + '.' + _this._name, function(e) {
@@ -195,6 +225,11 @@
       /*_this.$nav.on('click' + '.' + _this._name, function() {
         _this.someOtherFunction.call(_this);
       });*/
+
+      if (typeof c === 'function') {
+        c.call();
+      }
+
     },
 
     // Unbind events that trigger methods
@@ -203,13 +238,13 @@
 
       _this.$button.off('click' + '.' + _this._name);
 
-      _this.window.off('resize' + '.' + _this._name);
+      /*_this.window.off('resize' + '.' + _this._name);*/
 
       // touch actions
       Both.settings.oHandlersData.touch[_this.$collapsibleMenuItems]['touchend' + '.' + _this._name] = null;
-      Both.settings.oHandlersData.touch[_this._this.document]['touchstart' + '.' + _this._name] = null;
-      Both.settings.oHandlersData.touch[_this._this.document]['touchmove' + '.' + _this._name] = null;
-      Both.settings.oHandlersData.touch[_this._this.document]['touchend' + '.' + _this._name] = null;
+      Both.settings.oHandlersData.touch[_this.document]['touchstart' + '.' + _this._name] = null;
+      Both.settings.oHandlersData.touch[_this.document]['touchmove' + '.' + _this._name] = null;
+      Both.settings.oHandlersData.touch[_this.document]['touchend' + '.' + _this._name] = null;
 
       // mouse actions
       Both.settings.oHandlersData.touch[_this.$collapsibleMenuItems]['mouseenter' + '.' + _this._name] = null;
@@ -219,35 +254,44 @@
       //_this.$nav.off('.' + _this._name);
     },
 
-    reset: function() {
-      if (this._debug) console.log('###################### reset()');
+    reset: function(type) {
+      if (this._debug) console.log('########### reset()');
       var _this = this;
 
-      _this.$nav.off('mouseleave');
-      _this.$collapsiblePresentations.off('mouseenter' + '.' + _this._name);
-      _this.$collapsiblePresentations.off('mouseleave' + '.' + _this._name);
+      _this.unset(true, type);
+    },
+
+    unset: function(reset, type) {
+      if (this._debug) console.log('########### unset()');
+      var _this = this;
+
+      // touch actions
       _this.$collapsibleMenuItems
         .off('click' + '.' + _this._name)
         .removeClass('expanded').next('[role="menu"]').attr('hidden', true);
+
+      // mouse actions
+      _this.$collapsiblePresentations.off('mouseenter' + '.' + _this._name);
+      _this.$collapsiblePresentations.off('mouseleave' + '.' + _this._name);
+      _this.$nav.off('mouseleave' + '.' + _this._name);
+
+      if (reset) {
+        _this.set(type);
+      }
     },
 
-    set: function() {
+    set: function(type) {
       if (this._debug) console.log('###################### set()');
       var _this = this;
 
-      _this.reset();
-      $(window).data('Threshold').after('mobile', function() {
-        console.log(_this.width + ': mousenter OFF');
+      if (_this._debug) console.log('type', type);
 
+      if (type === 'short') {
         _this.$collapsibleMenuItems.on('click' + '.' + _this._name, function(e) {
           _this.menuitemTouchend($(this), e);
         });
 
-      });
-
-      $(window).data('Threshold').after(['x-small', 'small', 'medium', 'large', 'x-large'], function() {
-        console.log(_this.width + ': mousenter ON');
-
+      } else if (type === 'long') {
         _this.$collapsiblePresentations.on('mouseenter' + '.' + _this._name, function() {
           _this.menuitemMouseenter($(this));
         });
@@ -260,6 +304,26 @@
           _this.navMouseleave();
         });
 
+      }
+
+    },
+
+    start: function() {
+      if (this._debug) console.log('###################### start()');
+      var _this = this;
+
+      $(window).data('Threshold').after(_this.settings.short, function() {
+        console.log(_this.settings.short + ': mousenter OFF');
+
+        _this.reset('short');
+
+      });
+
+      $(window).data('Threshold').after(_this.settings.long, function() {
+        console.log(_this.settings.long + ': mousenter ON');
+
+        _this.reset('long');
+
       });
 
       $(window).data('Threshold').after('all', function() {
@@ -267,7 +331,7 @@
         _this.$button.removeClass('opened');
       });
 
-    }
+    },
 
   });
 
@@ -278,18 +342,14 @@
 
       var $returnObject = null;
 
-      // Undefined item
       if (typeof o === 'undefined') {
+        // Undefined item
         return;
-      }
-
-      // Object item
-      else if ((typeof o === 'object') && (o !== null)) {
+      } else if ((typeof o === 'object') && (o !== null)) {
+        // Object item
         $returnObject = o;
-      }
-
-      // Id or class item
-      else if ((typeof o === 'string') /*&& ((o.charAt(0) == '#') || (o.charAt(0) == '.'))*/) {
+      } else if ((typeof o === 'string') /*&& ((o.charAt(0) == '#') || (o.charAt(0) == '.'))*/) {
+        // Id or class item
         $returnObject = $(o);
       }
 
@@ -354,18 +414,40 @@
   };
 
   $.fn[ pluginName ].defaults = {
-    widths: [
+
+    // breakpoints (minimum: 2)
+    widths: {
+      'x-large': '1480px',
+      'large': '1360px',
+      'medium': '1220px',
+      'small': '920px',
+      'x-small': '740px',
+      'mobile': '100%',
+    },
+
+    // breakpoint(s) name(s) when short menu is activated
+    short: [
+      'mobile',
+    ],
+
+    // breakpoint(s) name(s) when long menu is activated
+    long: [
       'x-large',
       'large',
       'medium',
       'small',
       'x-small',
-      'mobile',
     ],
-    width: 'mobile',
+
+    // toggle menu button element (string or jQuery object)
     button: '#toggleNav',
-    onComplete: null,
-    debug: true,
+
+    // device type ('desktop', 'tablet' or 'mobile')
+    device: null,
+
+    // debug mode
+    debug: false,
+
   };
 
 })(jQuery, window, document);

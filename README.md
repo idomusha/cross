@@ -1,15 +1,12 @@
 #cross
 
-## manages page width change
+## multi-device navigation menu
 
 ## Demo
 
 [See Cross in action](http://idomusha.github.io/cross/)
 
 ## Usage
-
-#[WARNING] This plugin is not ready yet!
-(be patient) :)
 
 1. Include jQuery:
 
@@ -29,30 +26,12 @@
 	$('[role="menubar"]').cross();
 	```
 
-4. Declare callbacks (whenever):
+4. Override default values [OPTIONAL]:
 
 	```javascript
-	$(window).data('Threshold').after('mobile', function() {
-		$('#console').append('<p>[mobile]</p>');
-	});
-	$(window).data('Threshold').after('x-small', function() {
-		$('#console').append('<p>[x-small] an awesome callback!</p>');
-	});
-	$(window).data('Threshold').after('x-small', function() {
-		$('#console').append('<p>[x-small] an another awesome callback!</p>');
-	});
-	$(window).data('Threshold').after(['large', 'x-large'], function() {
-		$('#console').append('<p>[large] OR [x-large] callback for window width >= 1360px</p>');
-	});
-	$(window).data('Threshold').after('all', function() {
-		$('#console').append('<p>[all] callback for all thresholds</p>');
-	});
-	```
+	$('[role="menubar"]').cross({
 
-5. Override default values [OPTIONAL]:
-
-	```javascript
-	Threshold({
+		// breakpoints (minimum: 2)
 		widths: {
 			'x-large': '1480px',
 			'large': '1360px',
@@ -60,7 +39,28 @@
 			'small': '920px',
 			'x-small': '740px',
 			'mobile': '100%',
-		}
+		},
+
+		// breakpoint(s) name(s) when short menu is activated
+		short: [
+			'mobile',
+		],
+
+		// breakpoint(s) name(s) when long menu is activated
+		long: [
+			'x-large',
+			'large',
+			'medium',
+			'small',
+			'x-small',
+		],
+
+		// toggle menu button element (string or jQuery object)
+		button: '#Burger',
+
+		// device type ('desktop', 'tablet' or 'mobile')
+		device: '',
+
 	});
 	```
 
@@ -164,6 +164,16 @@
 	  }
 	}
 	```
+
+## Accessibility
+Cross uses semantic elements and attributes, as well as microdata and WAI-ARIA.
+
+## Dependencies
+Cross uses:
+	- [devicejs](http://matthewhudson.me/projects/device.js/) [OPTIONAL]
+	- [both](https://github.com/idomusha/both)
+	- [threshold](https://github.com/idomusha/threshold)
+
 
 ## You can also grab Both using bower:
 ```

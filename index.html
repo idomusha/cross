@@ -3,6 +3,8 @@
 	<head>
 		<title>cross - multi-device navigation menu</title>
 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
 		<link href="dist/cross.css" rel="stylesheet">
 		<link href="dist/demo.css" rel="stylesheet">
@@ -18,16 +20,19 @@
 					<span>multi-device navigation menu</span>
 				</h1>
 				<nav role="navigation" itemscope itemtype="http://www.schema.org/SiteNavigationElement"  class="width-auto width-fixed">
-					<!--
+					<!-- TODO
                     aria-activedescendant value corresponds to the id of the active menuitem
-                    (ex: aria-activedescendant="menuitem-5")
+                    ex:
+                    <ul role="menubar" aria-label="Menu Bar" aria-activedescendant="menuitem-1-submenu-1" class="off-canvas">
+                    [...]
+                    <button type="button" role="menuitem" aria-selected="true" aria-haspopup="true" id="menuitem-1">
                     -->
-					<ul role="menubar" aria-label="Menu Bar" aria-activedescendant="" class="off-canvas">
+					<ul role="menubar" aria-label="Menu Bar" class="off-canvas">
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<a href="#_" type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-1">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-1">
 								<span>Menu 1</span>
-							</a>
+							</button>
 							<ul role="menu" aria-labelledby="menuitem-1" aria-expanded="false" hidden>
 								<li role="presentation">
 									<a href="<?php print $GLOBALS['views_url']?>#_" role="menuitem" aria-selected="false" id="menuitem-1-submenu-1">
@@ -48,9 +53,9 @@
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<a href="#_" type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-2">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-2">
 								<span>Menu 2</span>
-							</a>
+							</button>
 							<ul role="menu" aria-labelledby="menuitem-2" aria-expanded="false" hidden>
 								<li role="presentation">
 									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-2-submenu-1">
@@ -74,9 +79,9 @@
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<a href="#_" type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-3">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-3">
 								<span>Menu 3</span>
-							</a>
+							</button>
 							<ul role="menu" aria-labelledby="menuitem-3" aria-expanded="false" hidden>
 								<li role="presentation">
 									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-3-submenu-1">
@@ -92,9 +97,9 @@
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<a href="#_" type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-4">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-4">
 								<span>Menu 4</span>
-							</a>
+							</button>
 							<ul role="menu" aria-labelledby="menuitem-4" aria-expanded="false" hidden>
 								<li role="presentation">
 									<a href="<?php print $GLOBALS['views_url']?>#_" role="menuitem" aria-selected="false" id="menuitem-4-submenu-1">
@@ -115,10 +120,9 @@
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<!-- active menuitem: aria-selected="true" -->
-							<a href="#_" type="button" role="menuitem" aria-selected="true" aria-haspopup="true" id="menuitem-5">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-5">
 								<span>Menu 5</span>
-							</a>
+							</button>
 							<ul role="menu" aria-labelledby="menuitem-5" aria-expanded="false" hidden>
 								<li role="presentation">
 									<a href="<?php print $GLOBALS['views_url']?>#_" role="menuitem" aria-selected="false" id="menuitem-5-submenu-1">
@@ -131,7 +135,7 @@
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-5-submenu-2">
+									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-5-submenu-3">
 										<span>Submenu 3</span>
 									</a>
 								</li>
@@ -154,6 +158,16 @@
 		</footer>
 		<script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script>!window.jQuery && document.write('<script src="bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
+
+		<!--
+		device.js [OPTIONAL]
+		Use this to define touch or mouse events handlers right from the page load according to the device detected: without having to wait an user interaction
+		You can use an another device detection.
+		In that case, define yourself the device variable:
+
+		-->
+		<script src="bower_components/devicejs/lib/device.min.js',"></script>
+
 		<script src="dist/cross.js"></script>
 		<script>
 			$(function() {

@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         src: [
           'bower_components/both/dist/both.js',
           'bower_components/threshold/dist/threshold.js',
-          'src/js/cross.js'
+          'src/js/cross.js',
         ],
         dest: 'dist/cross.js',
       },
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
     uglify: {
       default: {
         src: [
-          'dist/cross.js'
+          'dist/cross.js',
         ],
         dest: 'dist/cross.min.js',
       },
