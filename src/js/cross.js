@@ -313,14 +313,14 @@
       var _this = this;
 
       $(window).data('Threshold').after(_this.settings.short, function() {
-        if (this._debug) console.log(_this.settings.short + ': mousenter OFF / touch ON');
+        //console.log(_this.settings.short + ': mousenter OFF / touch ON');
 
         _this.reset('short');
 
       });
 
       $(window).data('Threshold').after(_this.settings.long, function() {
-        if (this._debug) console.log(_this.settings.long + ': mousenter ON / touch OFF');
+        //console.log(_this.settings.long + ': mousenter ON / touch OFF');
 
         _this.reset('long');
 
