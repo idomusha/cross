@@ -14,6 +14,12 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	```
 
+Include device detect [OPTIONAL]:
+
+	```html
+	<script src="bower_components/devicejs/lib/device.min.js"></script>
+	```
+
 2. Include plugin's code:
 
 	```html
@@ -23,13 +29,13 @@
 3. Call the plugin:
 
 	```javascript
-	$('[role="menubar"]').cross();
+	$('[role="navigation"]').cross();
 	```
 
-4. Override default values [OPTIONAL]:
+Or override default options [OPTIONAL]:
 
 	```javascript
-	$('[role="menubar"]').cross({
+	$('[role="navigation"]').cross({
 
 		// breakpoints (minimum: 2)
 		widths: {
@@ -41,12 +47,12 @@
 			'mobile': '100%',
 		},
 
-		// breakpoint(s) name(s) when short menu is activated
+		// breakpoint(s) name(s) when short menu is activated (string or array)
 		short: [
 			'mobile',
 		],
 
-		// breakpoint(s) name(s) when long menu is activated
+		// breakpoint(s) name(s) when long menu is activated (string or array)
 		long: [
 			'x-large',
 			'large',
@@ -58,11 +64,16 @@
 		// toggle menu button element (string or jQuery object)
 		button: '#Burger',
 
-		// device type ('desktop', 'tablet' or 'mobile')
+		// device type (string: 'desktop', 'tablet' or 'mobile')
 		device: '',
 
 	});
 	```
+
+Default CSS breakpoints are defined in src/less. You can find the CSS in dist/cross.css.
+If you change these values (either with LESS or directly in CSS), you have to match the new breakpoints values with 'widths' option.
+
+- variable.less:
 
 	```less
 	/* ==========================================================================
@@ -115,6 +126,8 @@
 	@screen-x-small: ~"screen and (min-width:@{step-min-x-small}) and (max-width:@{step-max-x-small})";   // min 740 & max 939
 	@screen-mobile: ~"screen and (max-width:@{step-max-mobile})";                                         // max 739
 	```
+
+- width.less:
 
 	```less
 	/**
