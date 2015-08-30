@@ -100,6 +100,7 @@
   background-color: transparent;
   border-bottom: 1px solid transparent;
   display: none;
+  z-index: @zindex-close;
   position: absolute;
   top: 0;
   left: 0;
@@ -159,7 +160,7 @@
     display: block;
   }
   [role="menubar"] {
-    z-index: @zindex-offcanvas-nav;
+    z-index: @zindex-offcanvas;
     position: fixed;
     top: 0;
     left: -260px;
@@ -207,6 +208,23 @@
     [role="menubar"].off-canvas {
       transform: translate3d(260px, 0, 0);
     }
+  }
+  body::before {
+    content: '';
+    display: block;
+    z-index: @zindex-overlay;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    opacity: 0;
+    transition: left 0.3s ease, opacity 0.3s ease;
+  }
+  .menu-on body::before {
+    left: 0;
+    opacity: 0.66;
   }
 
 }

@@ -310,6 +310,7 @@ h6 {
   background-color: transparent;
   border-bottom: 1px solid transparent;
   display: none;
+  z-index: 6;
   position: absolute;
   top: 0;
   left: 0;
@@ -421,5 +422,23 @@ h6 {
   .menu-on [role="menubar"].off-canvas {
     -webkit-transform: translate3d(260px, 0, 0);
             transform: translate3d(260px, 0, 0);
+  }
+  body::before {
+    content: '';
+    display: block;
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    opacity: 0;
+    -webkit-transition: left 0.3s ease, opacity 0.3s ease;
+            transition: left 0.3s ease, opacity 0.3s ease;
+  }
+  .menu-on body::before {
+    left: 0;
+    opacity: 0.66;
   }
 }
