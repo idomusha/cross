@@ -686,7 +686,7 @@
       _this.document = $(document);
       _this.window = $(window);
       _this.$html = $('html');
-      _this.$nav = $(_this.element);
+      _this.$nav = $(_this.element).children('[role="menubar"]');
       _this.$button = Private.define(_this.settings.button);
       _this.$collapsibleMenuItems = _this.$nav
         .children('[role="presentation"]')
@@ -705,6 +705,7 @@
       var _this = this;
 
       _this.$button.on('click' + '.' + _this._name, function() {
+        if (this._debug) console.log('~~~~~~~~~~~ ' +  _this.$button + ' click');
         _this.$html.toggleClass('menu-on');
         _this.$button.toggleClass('opened');
       });
