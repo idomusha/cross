@@ -178,6 +178,10 @@ If you change these values (either with LESS or directly in CSS), you have to ma
 	}
 	```
 
+You can change the HTML too.
+For example, you can have several [role="menubar"]...
+Cross targets WAI-ARIA roles: you just have to keep them.
+
 ## Accessibility
 Cross uses semantic elements and attributes, as well as microdata and WAI-ARIA.
 
