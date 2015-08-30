@@ -8,34 +8,34 @@
 
 ## Usage
 
-1.
-#### Include jQuery:
+###1.
+##### Include jQuery:
 
 	```html
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	```
 
-#### Include device detect [OPTIONAL]:
+##### Include device detect [OPTIONAL]:
 
 	```html
 	<script src="bower_components/devicejs/lib/device.min.js"></script>
 	```
 
-2.
-#### Include plugin's code:
+###2.
+##### Include plugin's code:
 
 	```html
 	<script src="dist/cross.min.js"></script>
 	```
 
-3.
-#### Call the plugin:
+###3.
+##### Call the plugin:
 
 	```javascript
 	$('[role="navigation"]').cross();
 	```
 
-#### Or override default options [OPTIONAL]:
+##### Or override default options [OPTIONAL]:
 
 	```javascript
 	$('[role="navigation"]').cross({
