@@ -1,7 +1,7 @@
 #cross
 
 ## multi-device navigation menu
-Cross is a responsive navigation menu witch let define the thresholds you want and witch switches hover/click events according to the menu state (reduced or extended) and separately switches mouse/touch events (because window width and interaction types are two very different things!).
+Cross is a responsive navigation menu which lets define the thresholds you want, switches hover/click events according to menu state (reduced or extended) and, separately, switches mouse/touch events (because window width and interaction types are two differents things!).
 
 ## Demo
 
