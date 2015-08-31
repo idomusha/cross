@@ -332,7 +332,9 @@
         if (_this.state === 'long') return;
         _this.state = 'long';
         _this.reset('long');
-        _this.settings.after.long.call(_this);
+        if (typeof _this.settings.after.long === 'function') {
+          _this.settings.after.long.call(_this);
+        }
       });
 
       $(window).data('Threshold').after('all', function() {

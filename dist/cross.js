@@ -1,5 +1,5 @@
 /* =================================================
- *  cross - v0.3.2
+ *  cross - v0.3.3
  *  multi-device navigation menu
  *  https://github.com/idomusha/cross
  *
@@ -853,7 +853,9 @@
         if (_this.state === 'long') return;
         _this.state = 'long';
         _this.reset('long');
-        _this.settings.after.long.call(_this);
+        if (typeof _this.settings.after.long === 'function') {
+          _this.settings.after.long.call(_this);
+        }
       });
 
       $(window).data('Threshold').after('all', function() {
