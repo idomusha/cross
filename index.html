@@ -179,7 +179,16 @@
 		<script>
 			$(function() {
 
-				$('[role="navigation"]').cross();
+				$('[role="navigation"]').cross({
+					after: {
+						short: function() {
+							console.log('menu switches to reduced version')
+						},
+						long: function() {
+							console.log('menu switches to extensive version')
+						},
+					}
+				});
 
 			});
 		</script>

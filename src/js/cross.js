@@ -13,6 +13,7 @@
     this.clearLastMenuItem = null;
     this.delayBeforeSlideDown = null;
     this.dragging = false;
+    this.state = null;
 
     this._name = pluginName;
 
@@ -317,15 +318,21 @@
       $(window).data('Threshold').after(_this.settings.short, function() {
         //console.log(_this.settings.short + ': mousenter OFF / touch ON');
 
+        if (_this.state === 'short') return;
+        _this.state = 'short';
         _this.reset('short');
-
+        if (typeof _this.settings.after.short === 'function') {
+          _this.settings.after.short.call(_this);
+        }
       });
 
       $(window).data('Threshold').after(_this.settings.long, function() {
         //console.log(_this.settings.long + ': mousenter ON / touch OFF');
 
+        if (_this.state === 'long') return;
+        _this.state = 'long';
         _this.reset('long');
-
+        _this.settings.after.long.call(_this);
       });
 
       $(window).data('Threshold').after('all', function() {
@@ -440,6 +447,12 @@
       'small',
       'x-small',
     ],
+
+    // after menu state change (function)
+    after: {
+      short: null,
+      long: null,
+    },
 
     // toggle menu button element (string or jQuery object)
     button: '#toggleNav',
