@@ -181,14 +181,17 @@
 
 				$('[role="navigation"]').cross({
 					after: {
+						init: function() {
+							console.log('cross is ready')
+						},
 						short: function() {
-							console.log('after menu has	switched to reduced version')
+							console.log('after menu has switched to: reduced')
 						},
 						long: function() {
-							console.log('after menu has	switched to extensive version')
+							console.log('after menu has switched to: extensive')
 						},
-						all: function() {
-							console.log('after menu has	switched to reduced version or to extensive version')
+						both: function() {
+							console.log('after menu has switched (reduced or extensive)')
 						},
 					}
 				});
