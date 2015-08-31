@@ -1,5 +1,5 @@
 /* =================================================
- *  cross - v0.2.1
+ *  cross - v0.3.1
  *  multi-device navigation menu
  *  https://github.com/idomusha/cross
  *
@@ -789,6 +789,7 @@
 
       // touch actions
       _this.$collapsibleMenuItems
+        .off('touchend' + '.' + _this._name)
         .off('click' + '.' + _this._name)
         .removeClass('expanded').next('[role="menu"]').attr('hidden', true);
 

@@ -268,6 +268,7 @@
 
       // touch actions
       _this.$collapsibleMenuItems
+        .off('touchend' + '.' + _this._name)
         .off('click' + '.' + _this._name)
         .removeClass('expanded').next('[role="menu"]').attr('hidden', true);
 
