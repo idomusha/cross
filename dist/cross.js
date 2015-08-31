@@ -1,5 +1,5 @@
 /* =================================================
- *  cross - v0.3.3
+ *  cross - v0.4.0
  *  multi-device navigation menu
  *  https://github.com/idomusha/cross
  *
@@ -586,9 +586,7 @@
       });
 
       // init interaction types manager plugin
-      Both.init();
-
-      //_this.callbacks = {};
+      if (!_this.settings.both) Both.init();
 
       // touch actions
       _this.menuitemTouchend = function(element, event) {
@@ -845,7 +843,11 @@
         if (typeof _this.settings.after.short === 'function') {
           _this.settings.after.short.call(_this);
         }
-      });
+
+        if (typeof _this.settings.after.both === 'function') {
+          _this.settings.after.both.call(_this);
+        }
+      })
 
       $(window).data('Threshold').after(_this.settings.long, function() {
         //console.log(_this.settings.long + ': mousenter ON / touch OFF');
@@ -856,15 +858,20 @@
         if (typeof _this.settings.after.long === 'function') {
           _this.settings.after.long.call(_this);
         }
+
+        if (typeof _this.settings.after.both === 'function') {
+          _this.settings.after.both.call(_this);
+        }
       });
 
       $(window).data('Threshold').after('all', function() {
-        _this.$html.removeClass('menu-on');
-        _this.$button.removeClass('opened');
-        if (typeof _this.settings.after.all === 'function') {
-          _this.settings.after.all.call(_this);
-        }
+        //_this.$html.removeClass('menu-on');
+        //_this.$button.removeClass('opened');
       });
+
+      if (typeof _this.settings.after.init === 'function') {
+        _this.settings.after.init.call(_this);
+      }
 
     },
 
@@ -950,7 +957,10 @@
 
   $.fn[ pluginName ].defaults = {
 
-    // breakpoints (minimum: 2)
+    // Threshold: class name prefix for
+    class: 'window',
+
+    // Threshold: breakpoints (minimum: 2)
     widths: {
       'x-large': '1480px',
       'large': '1360px',
@@ -976,8 +986,10 @@
 
     // after menu state change (function)
     after: {
+      init: null,
       short: null,
       long: null,
+      both: null,
     },
 
     // toggle menu button element (string or jQuery object)
@@ -985,6 +997,9 @@
 
     // device type ('desktop', 'tablet' or 'mobile')
     device: null,
+
+    // Both: set at true if you want to use and init by yourself
+    both: false,
 
     // debug mode
     debug: false,
