@@ -41,7 +41,10 @@ Cross is a responsive navigation menu which lets define the thresholds you want,
 	```javascript
 	$('[role="navigation"]').cross({
 
-		// breakpoints (minimum: 2)
+		// Threshold: class name prefix (string)
+		class: 'window',
+
+		 // Threshold: breakpoints (minimum: 2)
 		widths: {
 			'x-large': '1480px',
 			'large': '1360px',
@@ -65,14 +68,34 @@ Cross is a responsive navigation menu which lets define the thresholds you want,
 			'x-small',
 		],
 
+		// after menu state change (function)
+		after: {
+			init: function() {
+				console.log('cross is ready')
+			},
+			short: function() {
+				console.log('after menu has switched to: reduced')
+			},
+			long: function() {
+				console.log('after menu has switched to: extensive')
+			},
+			both: function() {
+				console.log('after menu has switched (reduced or extensive)')
+			},
+		}
+
 		// toggle menu button element (string or jQuery object)
 		button: '#Burger',
 
-		// device type (string: 'desktop', 'tablet' or 'mobile')
-		device: '',
+		// device type ('desktop', 'tablet' or 'mobile')
+		device: null,
+
+		// Both: set at true if you want to use and init by yourself
+		both: false,
 
 	});
 	```
+
 
 Default CSS breakpoints are defined in src/less. You can find the CSS in dist/cross.css.
 If you change these values (either with LESS or directly in CSS), you have to match the new breakpoints values with 'widths' option.
