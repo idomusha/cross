@@ -957,7 +957,7 @@
 
   $.fn[ pluginName ].defaults = {
 
-    // Threshold: class name prefix for
+    // Threshold: class name prefix (string)
     class: 'window',
 
     // Threshold: breakpoints (minimum: 2)
