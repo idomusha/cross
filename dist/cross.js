@@ -861,6 +861,9 @@
       $(window).data('Threshold').after('all', function() {
         _this.$html.removeClass('menu-on');
         _this.$button.removeClass('opened');
+        if (typeof _this.settings.after.all === 'function') {
+          _this.settings.after.all.call(_this);
+        }
       });
 
     },
