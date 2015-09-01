@@ -65,7 +65,7 @@
       });
 
       // init interaction types manager plugin
-      if (!_this.settings.both) Both.init();
+      Both.init();
 
       // touch actions
       _this.menuitemTouchend = function(element, event) {
@@ -144,7 +144,8 @@
       };
 
       // bind events, and then init interaction types manager plugin
-      _this.bindEvents(Both.start);
+      if (!_this.settings.both) _this.bindEvents(Both.start);
+      else _this.bindEvents();
 
       _this.start();
     },
