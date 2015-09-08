@@ -390,13 +390,13 @@
 
         // Only allow the plugin to be instantiated once,
         // so we check that the element has no plugin instantiation yet
-        if (!$.data(this, 'plugin_' + pluginName)) {
+        if (!$.data(this, pluginName)) {
 
           // if it has no instance, create a new one,
           // pass options to our plugin constructor,
           // and store the plugin instance
           // in the elements jQuery data object.
-          $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+          $.data(this, pluginName, new Plugin(this, options));
         }
       });
 
@@ -411,7 +411,7 @@
       var returns;
 
       this.each(function() {
-        var instance = $.data(this, 'plugin_' + pluginName);
+        var instance = $.data(this, pluginName);
 
         // Tests that there's already a plugin-instance
         // and checks that the requested public method exists
@@ -424,7 +424,7 @@
 
         // Allow instances to be destroyed via the 'destroy' method
         if (options === 'destroy') {
-          $.data(this, 'plugin_' + pluginName, null);
+          $.data(this, pluginName, null);
         }
       });
 
