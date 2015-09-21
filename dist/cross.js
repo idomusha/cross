@@ -582,6 +582,7 @@
 
       // init media-queries manager plugin
       Threshold({
+        class: _this.settings.class,
         widths: _this.settings.widths,
       });
 
