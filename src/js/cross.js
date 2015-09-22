@@ -96,6 +96,11 @@
       _this.documentTouchend = function(event) {
         if (_this.dragging) return;
         if (this._debug) console.log('--------------- >>> touchend document');
+
+        if (!$(event.target).closest(_this.$nav).length && !$(event.target).closest(_this.$button).length) {
+          _this.$button.trigger('click');
+        }
+
         if (!_this.$collapsibleMenuItems.hasClass('expanded')) return;
         if ($(event.target).parents('[role="menubar"]').length == 0) {
           if (this._debug) console.log('>>> close menuitems');
