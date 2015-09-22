@@ -1,6 +1,6 @@
 {
   "name": "cross",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "homepage": "https://github.com/idomusha/cross",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "authors": [
     "idomusha <idomusha@gmail.com>"
   ],
-  "description": "manages page width change",
+  "description": "multi-device navigation menu",
   "main": "src/js/cross.js",
   "keywords": [
     "media-queries",
@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "jquery": ">=1.7",
-    "both": "~0.2.0",
+    "both": "~0.3.0",
     "threshold": "~0.3.1",
     "devicejs": "~0.2.7"
   }
