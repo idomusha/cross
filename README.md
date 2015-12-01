@@ -39,23 +39,6 @@ Cross is a responsive navigation menu which lets define the thresholds you want,
 
 ##### Or override default options [OPTIONAL]:
 
-You can specify how many ranges you want (minimum: 2).  
-
-[threshold](https://github.com/idomusha/threshold) settings:
-- **ranges** setting takes as key the width range name (string) and as values the media query begin and end (array). "-1" means no value (for min-width or max-width)
-- **name** setting allows you to change the default data-attribute name by your own (or class prefix name if 'class' is defined as true)
-- **class** setting allows you to use a class instead of data-attribute
-
-[cross](https://github.com/idomusha/cross) settings:
-- **short** setting lists the breakpoint(s) name(s) when short menu is activated (string or array)
-- **long** setting lists the breakpoint(s) name(s) when long menu is activated (string or array)
-- **after** settings allows you to define callbacks (function)
-- **button** setting allows you to override default toggle menu button element (string or jQuery object)
-
-[both](https://github.com/idomusha/both) settings:
-- **device** setting allows you to initialize the plugin with a presetted device (string) 
-
-
 	```javascript
 	$('[role="navigation"]').cross({
 
@@ -113,6 +96,22 @@ You can specify how many ranges you want (minimum: 2).
 
 	});
 	```
+	
+You can specify how many ranges you want (minimum: 2).  
+
+[threshold](https://github.com/idomusha/threshold) settings:
+- **ranges** setting takes as key the width range name (string) and as values the media query begin and end (array). "-1" means no value (for min-width or max-width)
+- **name** setting allows you to change the default data-attribute name by your own (or class prefix name if 'class' is defined as true)
+- **class** setting allows you to use a class instead of data-attribute
+
+[cross](https://github.com/idomusha/cross) settings:
+- **short** setting lists the breakpoint(s) name(s) when short menu is activated (string or array)
+- **long** setting lists the breakpoint(s) name(s) when long menu is activated (string or array)
+- **after** settings allows you to define callbacks (function)
+- **button** setting allows you to override default toggle menu button element (string or jQuery object)
+
+[both](https://github.com/idomusha/both) settings:
+- **device** setting allows you to initialize the plugin with a presetted device (string) 
 
 
 Default CSS breakpoints are defined in src/less. You can find the CSS in dist/cross.css.
