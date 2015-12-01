@@ -1,6 +1,7 @@
-#cross
+# cross
 
-## multi-device navigation menu
+### multi-device navigation menu
+
 Cross is a responsive navigation menu which lets define the thresholds you want, switches hover/click events according to menu state (reduced or extended) and, separately, switches mouse/touch events (because window width and interaction types are two differents things!).
 
 ## Demo
@@ -38,21 +39,37 @@ Cross is a responsive navigation menu which lets define the thresholds you want,
 
 ##### Or override default options [OPTIONAL]:
 
+You can specify how many ranges you want.  
+- **ranges** setting takes as key the width range name (string) and as values the media query begin and end (array). "-1" means no value (for min-width or max-width)  
+- **name** setting allows you to change the default data-attribute name by your own (or class prefix name if 'class' is defined as true)  
+- **class** setting allows you to use a class instead of data-attribute  
+
+- **short** setting lists the breakpoint(s) name(s) when short menu is activated (string or array)
+- **long** setting lists the breakpoint(s) name(s) when long menu is activated (string or array)
+- **after** settings allows you to define callbacks (function)
+- **button** setting allows you to override default toggle menu button element (string or jQuery object)
+
+- **device** setting allows you to initialize the plugin with a presetted device (string) : read [both](https://github.com/idomusha/both)
+
+
 	```javascript
 	$('[role="navigation"]').cross({
 
-		// Threshold: class name prefix (string)
-		class: 'window',
-
-		 // Threshold: breakpoints (minimum: 2)
-		widths: {
-			'x-large': '1480px',
-			'large': '1360px',
-			'medium': '1220px',
-			'small': '920px',
-			'x-small': '740px',
-			'mobile': '100%',
-		},
+        // threshold: breakpoints (minimum: 2)
+        ranges: {
+          'x-large': ['1600px', -1],        // '1480px'
+          large: ['1440px', '1599px'],      // '1360px'
+          medium: ['1280px', '1439px'],     // '1220px'
+          small: ['960px', '1279px'],       // '920px'
+          'x-small': ['760px', '959px'],    // '740px',
+          mobile: [-1,'759px'],             // '100%',
+        },
+    
+        // threshold: data attribute name (or class name prefix)
+        name: 'width',                      // default: 'window'
+    
+        // threshold: data attribute (false) or class (true)
+        class: true,						// default: false
 
 		// breakpoint(s) name(s) when short menu is activated (string or array)
 		short: [
@@ -87,123 +104,16 @@ Cross is a responsive navigation menu which lets define the thresholds you want,
 		// toggle menu button element (string or jQuery object)
 		button: '#Burger',
 
-		// device type ('desktop', 'tablet' or 'mobile')
+		// device type ['desktop', 'tablet' or 'mobile'] (string)
 		device: null,
-
-		// Both: set at true if you want to use and init by yourself
-		both: false,
 
 	});
 	```
 
 
 Default CSS breakpoints are defined in src/less. You can find the CSS in dist/cross.css.
-If you change these values (either with LESS or directly in CSS), you have to match the new breakpoints values with 'widths' option.
+If you change these values (either with LESS or directly in CSS), you have to match the new breakpoints values with 'ranges' option.
 
-- variable.less:
-
-	```less
-	/* ==========================================================================
-	 * VARIABLES
-	 * ========================================================================== */
-
-
-	/* page
-	 * ========================================================================== */
-	@page-width-x-large: 1480px;
-	@page-width-large: 1360px;
-	@page-width-medium: 1220px;
-	@page-width-small: 920px;
-	@page-width-x-small: 740px;
-	@page-width-mobile: 100%;
-
-
-	/* steps
-	 * ========================================================================== */
-	@step-min-x-large: (@page-width-x-large + 2*60);        // 1600 --> 1480 (page) + 2*60 (min auto margin)
-	@step-max-large: (@page-width-x-large + 2*60 - 1);
-	@step-min-large: (@page-width-large + 2*40);            // 1440 --> 1360 (page) + 2*40 (min auto margin)
-	@step-max-medium: (@page-width-large + 2*40 - 1);
-	@step-min-medium: (@page-width-medium + 2*30);          // 1280 --> 1220 (page) + 2*30 (min auto margin)
-	@step-max-small: (@page-width-medium + 2*30 - 1);
-	@step-min-small: (@page-width-small + 2*20);            // 960 --> 920 (page) + 2*20 (min auto margin)
-	@step-max-x-small: (@page-width-small + 2*20 - 1);
-	@step-min-x-small: (@page-width-x-small);               // 740 (page) + 0 (min auto margin)
-	@step-max-mobile: (@page-width-x-small - 1);
-
-
-	/* screen
-	 * ========================================================================== */
-	@screen-min-x-large: ~"screen and (min-width:@{step-min-x-large})";   // min 1480
-	@screen-min-large: ~"screen and (min-width:@{step-min-large})";       // min 1360
-	@screen-min-medium: ~"screen and (min-width:@{step-min-medium})";     // min 1220
-	@screen-min-small: ~"screen and (min-width:@{step-min-small})";       // min 940
-	@screen-min-x-small: ~"screen and (min-width:@{step-min-x-small})";   // min 740
-
-	@screen-max-large: ~"screen and (max-width:@{step-max-large})";       // max 1479
-	@screen-max-medium: ~"screen and (max-width:@{step-max-medium})";     // max 1359
-	@screen-max-small: ~"screen and (max-width:@{step-max-small})";       // max 1219
-	@screen-max-x-small: ~"screen and (max-width:@{step-max-x-small})";   // max 939
-	@screen-max-mobile: ~"screen and (max-width:@{step-max-mobile})";     // max 739
-
-	@screen-x-large: ~"screen and (min-width:@{step-min-x-large})";                                       // min 1480
-	@screen-large: ~"screen and (min-width:@{step-min-large}) and (max-width:@{step-max-large})";         // min 1360 & max 1479
-	@screen-medium: ~"screen and (min-width:@{step-min-medium}) and (max-width:@{step-max-medium})";      // min 1220 & max 1359
-	@screen-small: ~"screen and (min-width:@{step-min-small}) and (max-width:@{step-max-small})";         // min 940 & max 1219
-	@screen-x-small: ~"screen and (min-width:@{step-min-x-small}) and (max-width:@{step-max-x-small})";   // min 740 & max 939
-	@screen-mobile: ~"screen and (max-width:@{step-max-mobile})";                                         // max 739
-	```
-
-- width.less:
-
-	```less
-	/**
-	 * ==========================================================================
-	 * WIDTH
-	 * ========================================================================== */
-
-
-	.width-full {
-	  width: 100%;
-	  position: relative;
-	}
-
-	.width-fixed {
-	  width: @page-width-x-large;
-	  position: relative;
-	  margin: 0 auto;
-	}
-
-	@media @screen-max-large {
-	  .width-fixed {
-		width: @page-width-large;
-	  }
-	}
-
-	@media @screen-max-medium {
-	  .width-fixed {
-		width: @page-width-medium;
-	  }
-	}
-
-	@media @screen-max-small {
-	  .width-fixed {
-		width: @page-width-small;
-	  }
-	}
-
-	@media @screen-max-x-small {
-	  .width-fixed {
-		width: @page-width-x-small;
-	  }
-	}
-
-	@media @screen-max-mobile {
-	  .width-fixed {
-		width: @page-width-mobile;
-	  }
-	}
-	```
 
 You can change the HTML too.
 For example, you can have several [role="menubar"]...
