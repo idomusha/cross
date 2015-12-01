@@ -32,41 +32,42 @@
     init: function() {
       var _this = this;
       _this.devices = [
-        'desktop',
-        'tablet',
-        'mobile',
+      'desktop',
+      'tablet',
+      'mobile',
       ];
 
+      // init interaction types manager plugin
       if (_this.devices.indexOf(_this.settings.device) > -1) {
-        Both.options = {
+        both({
           device: _this.settings.device,
-        };
+        });
       } else {
         if (device.tablet()) {
-          Both.options = {
+          both({
             device: 'tablet',
-          };
+          });
 
           $('meta[name="viewport"]').attr('content', 'width=920');
         } else if (device.mobile()) {
-          Both.options = {
+          both({
             device: 'mobile',
-          };
+          });
 
           $('meta[name="viewport"]').attr('content', 'width=device-width, initial-scale=1.0');
+        } else {
+          both();
         }
       }
 
       _this.buildCache();
 
       // init media-queries manager plugin
-      Threshold({
+      threshold({
+        name: _this.settings.name,
+        ranges: _this.settings.ranges,
         class: _this.settings.class,
-        widths: _this.settings.widths,
       });
-
-      // init interaction types manager plugin
-      Both.init();
 
       // touch actions
       _this.menuitemTouchend = function(element, event) {
@@ -97,7 +98,7 @@
         if (_this.dragging) return;
         if (this._debug) console.log('--------------- >>> touchend document');
 
-        if (!$(event.target).closest(_this.$nav).length && !$(event.target).closest(_this.$button).length) {
+        if (!$(event.target).closest(_this.$nav).length && _this.$html.hasClass('menu-on') && !$(event.target).closest(_this.$button).length) {
           _this.$button.trigger('click');
         }
 
@@ -106,6 +107,7 @@
           if (this._debug) console.log('>>> close menuitems');
           _this.$collapsibleMenuItems.removeClass('expanded').next('[role="menu"]').attr('hidden', true);
         }
+
       };
 
       // mouse actions
@@ -149,9 +151,14 @@
         _this.bFirstShow = false;
       };
 
-      // bind events, and then init interaction types manager plugin
-      if (!_this.settings.both) _this.bindEvents(Both.start);
-      else _this.bindEvents();
+      _this.documentClick = function(event) {
+        if (this._debug) console.log('--------------- >>> click document');
+
+        if (!$(event.target).closest(_this.$nav).length && _this.$html.hasClass('menu-on') && !$(event.target).closest(_this.$button).length) {
+          _this.$button.trigger('click');
+        }
+
+      };
 
       _this.start();
     },
@@ -160,7 +167,8 @@
     destroy: function() {
       var _this = this;
 
-      _this.unbindEvents();
+      _this.unbindEvents.short();
+      _this.unbindEvents.long();
       _this.$nav.removeData();
     },
 
@@ -168,17 +176,17 @@
     buildCache: function() {
       var _this = this;
 
-      _this.document = $(document);
+      _this.document = $(document.documentElement);;
       _this.window = $(window);
       _this.$html = $('html');
       _this.$nav = $(_this.element).children('[role="menubar"]');
       _this.$button = Private.define(_this.settings.button);
       _this.$collapsibleMenuItems = _this.$nav
-        .children('[role="presentation"]')
-        .children('[role="menuitem"]')
-        .filter(function() {
-        return $(this).next('[role="menu"]').length;
-      });
+				.children('[role="presentation"]')
+				.children('[role="menuitem"]')
+				.filter(function() {
+  return $(this).next('[role="menu"]').length;
+				});
 
       _this.$collapsiblePresentations = _this.$collapsibleMenuItems.parent('[role="presentation"]');
       _this.window = $(window);
@@ -186,79 +194,119 @@
     },
 
     // Bind events that trigger methods
-    bindEvents: function(c) {
-      var _this = this;
+    bindEvents: {
 
-      _this.$button.on('click' + '.' + _this._name, function() {
-        if (this._debug) console.log('~~~~~~~~~~~ ' +  _this.$button + ' click');
-        _this.$html.toggleClass('menu-on');
-        _this.$button.toggleClass('opened');
-      });
+      short: function(c) {
+        if (this._debug) console.log('########### bindEvents.short()');
+        var _this = this;
 
-      /*_this.window.on('resize' + '.' + _this._name, function() {
-        _this.reset();
-      });*/
+        _this.$button.on('click' + '.' + _this._name, function() {
+          if (this._debug) console.log('~~~~~~~~~~~ ' + _this.$button + ' click');
+          _this.$collapsibleMenuItems.removeClass('expanded').next('[role="menu"]').attr('hidden', true);
+          _this.$html.toggleClass('menu-on');
+          _this.$button.toggleClass('opened');
+        });
 
-      // touch actions
-      Both.store('touch', _this.$collapsibleMenuItems, 'touchend' + '.' + _this._name, function(e) {
-        _this.menuitemTouchend($(this), e);
-      });
+        _this.$collapsibleMenuItems.on('click' + '.' + _this._name, function(e) {
+          _this.menuitemTouchend($(this), e);
+        });
 
-      Both.store('touch', _this.document, 'touchstart' + '.' + _this._name, function() {
-        _this.documentTouchstart();
-      });
+        _this.document.on('click' + '.' + _this._name, function(e) {
+          _this.documentClick(e);
+        });
 
-      Both.store('touch', _this.document, 'touchmove' + '.' + _this._name, function() {
-        _this.documentTouchmove();
-      });
+        if (typeof c === 'function') {
+          c.call();
+        }
 
-      Both.store('touch', _this.document, 'touchend' + '.' + _this._name, function(e) {
-        _this.documentTouchend(e);
-      });
+      },
 
-      // mouse actions
-      Both.store('mouse', _this.$collapsiblePresentations, 'mouseenter' + '.' + _this._name, function() {
-        _this.menuitemMouseenter($(this));
-      });
+      long: function(c) {
+        if (this._debug) console.log('########### bindEvents.long()');
+        var _this = this;
 
-      Both.store('mouse', _this.$collapsiblePresentations, 'mouseleave' + '.' + _this._name, function() {
-        _this.menuitemMouseleave();
-      });
+        // touch actions
+        $(window).data('both').store('touch', _this.$collapsibleMenuItems, 'touchend' + '.' + _this._name, function(e) {
+          _this.menuitemTouchend($(this), e);
+        });
 
-      Both.store('mouse', _this.$nav, 'mouseleave' + '.' + _this._name, function(e) {
-        _this.navMouseleave();
-      });
+        $(window).data('both').store('touch', _this.document, 'touchstart' + '.' + _this._name, function() {
+          _this.documentTouchstart();
+        });
 
-      /*_this.$nav.on('click' + '.' + _this._name, function() {
-        _this.someOtherFunction.call(_this);
-      });*/
+        $(window).data('both').store('touch', _this.document, 'touchmove' + '.' + _this._name, function() {
+          _this.documentTouchmove();
+        });
 
-      if (typeof c === 'function') {
-        c.call();
-      }
+        $(window).data('both').store('touch', _this.document, 'touchend' + '.' + _this._name, function(e) {
+          _this.documentTouchend(e);
+        });
+
+        // mouse actions
+        $(window).data('both').store('mouse', _this.$collapsiblePresentations, 'mouseenter' + '.' + _this._name, function() {
+          _this.menuitemMouseenter($(this));
+        });
+
+        $(window).data('both').store('mouse', _this.$collapsiblePresentations, 'mouseleave' + '.' + _this._name, function() {
+          _this.menuitemMouseleave();
+        });
+
+        $(window).data('both').store('mouse', _this.$nav, 'mouseleave' + '.' + _this._name, function(e) {
+          _this.navMouseleave();
+        });
+
+        $(window).data('both').store('mouse', _this.document, 'click' + '.' + _this._name, function(e) {
+          _this.documentClick(e);
+        });
+
+        if (typeof c === 'function') {
+          c.call();
+        }
+
+      },
 
     },
 
     // Unbind events that trigger methods
-    unbindEvents: function() {
-      var _this = this;
+    unbindEvents: {
 
-      _this.$button.off('click' + '.' + _this._name);
+      short: function() {
+        if (this._debug) console.log('########### unbindEvents.short()');
+        var _this = this;
 
-      /*_this.window.off('resize' + '.' + _this._name);*/
+        _this.$button.off('click' + '.' + _this._name);
+        _this.$collapsibleMenuItems.off('click' + '.' + _this._name);
+        _this.document.off('click' + '.' + _this._name);
+      },
 
-      // touch actions
-      Both.settings.oHandlersData.touch[_this.$collapsibleMenuItems]['touchend' + '.' + _this._name] = null;
-      Both.settings.oHandlersData.touch[_this.document]['touchstart' + '.' + _this._name] = null;
-      Both.settings.oHandlersData.touch[_this.document]['touchmove' + '.' + _this._name] = null;
-      Both.settings.oHandlersData.touch[_this.document]['touchend' + '.' + _this._name] = null;
+      long: function(c) {
+        if (this._debug) console.log('########### unbindEvents.long()');
+        var _this = this;
 
-      // mouse actions
-      Both.settings.oHandlersData.touch[_this.$collapsibleMenuItems]['mouseenter' + '.' + _this._name] = null;
-      Both.settings.oHandlersData.touch[_this.$collapsibleMenuItems]['mouseleave' + '.' + _this._name] = null;
-      Both.settings.oHandlersData.touch[_this.$nav]['mouseleave' + '.' + _this._name] = null;
+        // touch actions
+        $(window).data('both').lose('touch', _this.$collapsibleMenuItems, 'touchend' + '.' + _this._name);
 
-      //_this.$nav.off('.' + _this._name);
+        $(window).data('both').lose('touch', _this.document, 'touchstart' + '.' + _this._name);
+
+        $(window).data('both').lose('touch', _this.document, 'touchmove' + '.' + _this._name);
+
+        $(window).data('both').lose('touch', _this.document, 'touchend' + '.' + _this._name);
+
+        // mouse actions
+        $(window).data('both').lose('mouse', _this.$collapsiblePresentations, 'mouseenter' + '.' + _this._name);
+
+        $(window).data('both').lose('mouse', _this.$collapsiblePresentations, 'mouseleave' + '.' + _this._name);
+
+        $(window).data('both').lose('mouse', _this.$nav, 'mouseleave' + '.' + _this._name);
+
+        $(window).data('both').lose('mouse', _this.document, 'click' + '.' + _this._name);
+
+        if (typeof c === 'function') {
+          c.call();
+        }
+
+      },
+
     },
 
     reset: function(type) {
@@ -272,16 +320,11 @@
       if (this._debug) console.log('########### unset()');
       var _this = this;
 
-      // touch actions
-      _this.$collapsibleMenuItems
-        .off('touchend' + '.' + _this._name)
-        .off('click' + '.' + _this._name)
-        .removeClass('expanded').next('[role="menu"]').attr('hidden', true);
-
-      // mouse actions
-      _this.$collapsiblePresentations.off('mouseenter' + '.' + _this._name);
-      _this.$collapsiblePresentations.off('mouseleave' + '.' + _this._name);
-      _this.$nav.off('mouseleave' + '.' + _this._name);
+      if (type === 'short') {
+        _this.unbindEvents.long.call(_this/*, both.start*/);
+      } else if (type === 'long') {
+        _this.unbindEvents.short.call(_this);
+      }
 
       if (reset) {
         _this.set(type);
@@ -295,23 +338,9 @@
       if (_this._debug) console.log('type', type);
 
       if (type === 'short') {
-        _this.$collapsibleMenuItems.on('click' + '.' + _this._name, function(e) {
-          _this.menuitemTouchend($(this), e);
-        });
-
+        _this.bindEvents.short.call(_this/*, both.start*/);
       } else if (type === 'long') {
-        _this.$collapsiblePresentations.on('mouseenter' + '.' + _this._name, function() {
-          _this.menuitemMouseenter($(this));
-        });
-
-        _this.$collapsiblePresentations.on('mouseleave' + '.' + _this._name, function() {
-          _this.menuitemMouseleave();
-        });
-
-        _this.$nav.on('mouseleave' + '.' + _this._name, function() {
-          _this.navMouseleave();
-        });
-
+        _this.bindEvents.long.call(_this/*, both.start*/);
       }
 
     },
@@ -320,7 +349,7 @@
       if (this._debug) console.log('###################### start()');
       var _this = this;
 
-      $(window).data('Threshold').after(_this.settings.short, function() {
+      $(window).data('threshold').after(_this.settings.short, function() {
         //console.log(_this.settings.short + ': mousenter OFF / touch ON');
 
         if (_this.state === 'short') return;
@@ -333,9 +362,9 @@
         if (typeof _this.settings.after.both === 'function') {
           _this.settings.after.both.call(_this);
         }
-      })
+      });
 
-      $(window).data('Threshold').after(_this.settings.long, function() {
+      $(window).data('threshold').after(_this.settings.long, function() {
         //console.log(_this.settings.long + ': mousenter ON / touch OFF');
 
         if (_this.state === 'long') return;
@@ -350,7 +379,7 @@
         }
       });
 
-      $(window).data('Threshold').after('all', function() {
+      $(window).data('threshold').after('all', function() {
         //_this.$html.removeClass('menu-on');
         //_this.$button.removeClass('opened');
       });
@@ -443,18 +472,21 @@
 
   $.fn[ pluginName ].defaults = {
 
-    // Threshold: class name prefix (string)
-    class: 'window',
-
-    // Threshold: breakpoints (minimum: 2)
-    widths: {
-      'x-large': '1480px',
-      'large': '1360px',
-      'medium': '1220px',
-      'small': '920px',
-      'x-small': '740px',
-      'mobile': '100%',
+    // threshold: breakpoints (minimum: 2)
+    ranges: {
+      'x-large': ['1600px', -1],      // '1480px'
+      large: ['1440px', '1599px'],    // '1360px'
+      medium: ['1280px', '1439px'],   // '1220px'
+      small: ['960px', '1279px'],     // '920px'
+      'x-small': ['760px', '959px'],  // '740px',
+      mobile: [-1,'759px'],           // '100%',
     },
+
+    // threshold: data attribute name (or class name prefix)
+    name: 'width',						        // default: 'window'
+
+    // threshold: data attribute (false) or class (true)
+    class: true,						          // default: false
 
     // breakpoint(s) name(s) when short menu is activated
     short: [
@@ -483,9 +515,6 @@
 
     // device type ('desktop', 'tablet' or 'mobile')
     device: null,
-
-    // Both: set at true if you want to use and init by yourself
-    both: false,
 
     // debug mode
     debug: false,
