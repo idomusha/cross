@@ -1,6 +1,6 @@
 {
   "name": "threshold",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "homepage": "https://github.com/idomusha/threshold",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "authors": [
     "idomusha <idomusha@gmail.com>"
   ],
-  "description": "manages page width change",
+  "description": "manages window width changes",
   "main": "src/js/threshold.js",
   "keywords": [
     "media-queries",
@@ -23,15 +23,16 @@
     "CONTRIBUTING.md"
   ],
   "dependencies": {
-    "jquery": ">=1.7"
+    "jquery": ">=1.7",
+    "matchMedia": "matchmedia#~0.2.0"
   },
-  "_release": "0.3.1",
+  "_release": "0.4.0",
   "_resolution": {
     "type": "version",
-    "tag": "v0.3.1",
-    "commit": "4ac58f8d0326831ced4971407c5bd04f65e89599"
+    "tag": "0.4.0",
+    "commit": "1b9df06e4fcc9b7cd20b32a84cd5bfb106a5339e"
   },
   "_source": "git://github.com/idomusha/threshold.git",
-  "_target": "~0.3.1",
+  "_target": "~0.4.0",
   "_originalSource": "threshold"
 }

@@ -1,7 +1,7 @@
 {
   "name": "both",
   "main": "src/js/both.js",
-  "version": "0.4.0",
+  "version": "0.7.0",
   "homepage": "https://github.com/idomusha/both",
   "repository": {
     "type": "git",
@@ -19,21 +19,19 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
-    "index.html",
     "CHANGELOG.md",
     "CONTRIBUTING.md"
   ],
   "dependencies": {
     "jquery": ">=1.7"
   },
-  "_release": "0.4.0",
+  "_release": "0.7.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.4.0",
-    "commit": "64623268e4efd74be2987fe8fde5650ef69350f8"
+    "tag": "0.7.0",
+    "commit": "6cd12b0f93c7b342c3287c4c7791a86d942430e0"
   },
   "_source": "git://github.com/idomusha/both.git",
-  "_target": "~0.4.0",
+  "_target": "~0.7.0",
   "_originalSource": "both"
 }

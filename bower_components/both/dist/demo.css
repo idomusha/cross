@@ -174,6 +174,10 @@ a.link-unobtrusive {
 :focus {
   outline: none !important;
 }
+html[data-interaction="keyboard"] :focus {
+  outline: 2px solid #dc8e3b !important;
+  outline-offset: -1px;
+}
 /* Layout
  * ========================================================================== */
 /**
@@ -282,22 +286,228 @@ header [role="menubar"] > [role="presentation"] > [role="menuitem"] {
     display: inline-block;
   }
 }
+.width-fixed {
+  padding: 0 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+body {
+  background-color: #f7f7f7;
+}
+header {
+  background-color: #fff;
+}
+h2 {
+  margin: 15px 0;
+  font-weight: 700;
+  font-size: 30px;
+}
+article {
+  position: relative;
+  max-width: 800px;
+  margin: 60px auto;
+}
+label {
+  display: block;
+  text-align: left;
+  font-size: 20px;
+}
+input[type="text"],
+select {
+  width: 280px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: block;
+  border: 1px solid #ccc;
+}
+header + section {
+  background-color: #333;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.navigation a {
+  background-color: #1d1d1d;
+  color: #fff;
+  flex-grow: 1;
+  text-align: center;
+  padding: 1em;
+  font-size: 1.2em;
+  text-decoration: none;
+  margin: 0 0 0 1px;
+}
+.navigation a:first-child {
+  margin: 0;
+}
+@media screen and (max-width:739px) {
+  .navigation {
+    flex-direction: column;
+  }
+  .navigation a {
+    margin: 1px 0 0 0;
+  }
+}
+.user-interaction {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+.user-interaction li {
+  list-style: none;
+  flex-grow: 1;
+  text-align: center;
+  padding: 1em;
+}
+.user-interaction li.mouse,
+.user-interaction li.touch,
+.user-interaction li.keyboard {
+  background-color: #333;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+[data-interaction="mouse"] .user-interaction li.mouse {
+  background-color: #66abbd;
+}
+[data-interaction="touch"] .user-interaction li.touch {
+  background-color: #6ed28c;
+}
+[data-interaction="keyboard"] .user-interaction li.keyboard {
+  background-color: #7484c7;
+}
+/* checkBox / radio
+ * ========================================================================== */
+.radio-wrap,
+.checkbox-wrap {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+}
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+  margin-right: 20px;
+  line-height: 1.2em;
+  vertical-align: middle;
+  display: inline-block;
+  font-weight: 400;
+  position: relative;
+  margin-left: 20px;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  clip: rect(0 0 0 0);
+}
+input[type="checkbox"] + label::before,
+input[type="radio"] + label::before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-top: 0;
+  height: 15px;
+  width: 15px;
+  border: 1px solid #66abbd;
+  background: #66abbd;
+  box-shadow: inset 0 0 0 7.6px #ffffff;
+  transition: 0.3s ease;
+  position: absolute;
+  top: 4px;
+  left: -20px;
+}
+input[type="checkbox"] + label::before {
+  border-radius: 0;
+}
+input[type="radio"] + label::before {
+  border-radius: 50%;
+}
+html[data-interaction="keyboard"] input[type="checkbox"]:focus + label::before,
+html[data-interaction="keyboard"] input[type="radio"]:focus + label::before {
+  outline: 2px solid #dc8e3b;
+}
+input[type="checkbox"]:checked + label::before,
+input[type="radio"]:checked + label::before {
+  box-shadow: inset 0 0 0 2px #fff;
+}
 .button-blue {
   border: 0 none;
   border-radius: 0;
+  margin: 10px 0;
   padding: 15px 30px;
   background-color: #77c4d5;
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
   box-shadow: 0 4px 0 0 #66abbd;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .button-blue:hover {
   background-color: #66abbd;
   box-shadow: 0 4px 0 0 #5793a4;
+}
+figure {
+  background-color: #66abbd;
+  width: 640px;
+  max-width: 100%;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+figure h3 {
+  font-weight: 700;
+}
+figure > a {
+  display: block;
+}
+figure img {
+  width: 100%;
+  opacity: 0.66;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.3s ease;
+}
+figure figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 198px;
+  padding: 20px;
+  background-color: #1d1d1d;
+  color: #fff;
+  transform: translate3d(0, 198px, 0);
+  transition: transform 0.3s ease;
+}
+figure figcaption a {
+  color: #fff;
+}
+figure figcaption .description {
+  margin-bottom: 0;
+}
+html[data-interaction="mouse"] figure:hover figcaption {
+  transform: translate3d(0, 0, 0);
+}
+html[data-interaction="mouse"] figure:hover img {
+  transform: translate3d(0, -198px, 0);
+  transition: transform 0.3s ease;
+}
+html[data-interaction="touch"] figure figcaption,
+html[data-interaction="keyboard"] figure figcaption {
+  transform: none;
+  position: relative;
+  bottom: auto;
+  left: auto;
+  height: auto;
 }
 /*# sourceMappingURL=dist/demo.css.map */

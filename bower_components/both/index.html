@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>both - detects in real time user interaction type (Mouse or Touch) and switches linked events</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+		<link href="dist/demo.css" rel="stylesheet">
+	</head>
+	<body>
+		<header class="width-full">
+			<div class="width-fixed">
+				<div id="toggleNav" class="toggle">
+					<span class="toggle-bar"></span>
+				</div>
+				<h1 class="website-title">
+					<strong>both</strong>
+					<span>user interaction detection</span>
+				</h1>
+			</div>
+		</header>
+        <section class="width-full">
+            <div class="width-fixed">
+                <ul class="user-interaction">
+                    <li class="mouse">mouse</li>
+                    <li class="touch">touch</li>
+                    <li class="keyboard">keyboard</li>
+                </ul>
+            </div>
+        </section>
+		<section class="width-full">
+			<div class="width-fixed">
+                <!--<article>
+                   <h2>Menu</h2>
+
+               </article>-->
+                <article id="navigation">
+                    <h2>Menu</h2>
+                    <div class="navigation">
+                        <a class="" href="#menu">
+                            navigation
+                        </a>
+                        <a class="" href="#test">
+                            test
+                        </a>
+                        <a class="" href="#form">
+                            form
+                        </a>
+                        <a class="" href="#image">
+                            image
+                        </a>
+                    </div>
+                </article>
+                <article id="test">
+                    <h2>Test</h2>
+                    <button type="button" class="button-blue" href="#button">
+                        BUTTON
+                    </button>
+                </article>
+                <article id="form">
+                    <h2>Form</h2>
+                    <div class="field field-radio">
+                        <label>Superhero?</label>
+                        <span class="radio-wrap">
+                            <input id="radio-1" type="radio" value="" name="radio">
+                            <label for="radio-1">Yes</label>
+                        </span>
+                        <span class="radio-wrap">
+                            <input id="radio-2" type="radio" value="" name="radio">
+                            <label for="radio-2">No</label>
+                        </span>
+                    </div>
+                    <label for="name">Name</label>
+                    <input id="name" type="text" placeholder="type here doesn't activate 'keyboard'">
+                    <label for="email">Email</label>
+                    <input id="email" type="text" placeholder="type here doesn't activate 'keyboard'">
+                    <label for="gender">Gender</label>
+                    <select id="gender">
+                        <option></option>
+                        <option>Female</option>
+                        <option>Male</option>
+                        <option>Custom</option>
+                    </select>
+                    <div class="field field-checkbox">
+                        <label>Who's your best friend?</label>
+                        <span class="checkbox-wrap">
+                            <input id="checkbox-1" type="checkbox" value="" name="checkbox">
+                            <label for="checkbox-1">Cat</label>
+                        </span>
+                        <span class="checkbox-wrap">
+                            <input id="checkbox-2" type="checkbox" value="" name="checkbox">
+                            <label for="checkbox-2">Dog</label>
+                        </span>
+                         <span class="checkbox-wrap">
+                            <input id="checkbox-3" type="checkbox" value="" name="checkbox">
+                            <label for="checkbox-3">Unicorn</label>
+                        </span>
+                    </div>
+                    <button type="submit" class="button-blue" href="#button">
+                        OKAY
+                    </button>
+                </article>
+                <article id="image">
+                    <h2>Image Overlay Hover</h2>
+                    <figure>
+                        <a href="https://flic.kr/p/kq58ST" target="_blank">
+                            <img src="https://farm8.staticflickr.com/7353/12743181443_9dfd24a886_z.jpg" alt="Beautiful light">
+                        </a>
+                        <figcaption>
+                            <h3><a href="https://flic.kr/p/kq58ST" target="_blank">Beautiful light</a> (CC BY-NC-ND 2.0)</h3>
+                            <small>by <a href="https://www.flickr.com/people/rfunnell/" target="_blank">Ross Funnell</a></small>
+                            <p class="description">
+                                The room was vacant except for a metal slab that served as a bed and the six-legged, cat-like creature sitting on the edge of the bed watching its sleeping occupant.
+                            </p>
+                        </figcaption>
+                    </figure>
+                </article>
+			</div>
+		</section>
+		<footer class="width-full">
+			<div class="width-fixed">
+				&nbsp
+			</div>
+		</footer>
+		<script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script>!window.jQuery && document.write('<script src="bower_components/jquery/dist/jquery.min.js"><\/script>')</script>
+
+		<script src="dist/both.js"></script>
+		<script>
+			$(function() {
+
+				both();
+
+				$(window).data('both').store('mouse', $('.button-blue'), 'mouseenter', function (e) {
+					alert("Zed's dead");
+				});
+                $(window).data('both').lose('mouse',$('.button-blue'), 'mouseenter');
+
+                $(window).data('both').store('mouse', $('.button-blue'), 'mouseenter', function (e) {
+                    alert("Mickey");
+                });
+                $(window).data('both').store('touch', $('.button-blue'), 'touchend', function (e) {
+                    alert("Tacchi");
+                });
+
+			});
+		</script>
+	</body>
+</html>
