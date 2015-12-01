@@ -2,7 +2,7 @@
 
 ### multi-device navigation menu
 
-Cross is a responsive navigation menu which lets define the thresholds you want, switches hover/click events according to menu state (reduced or extended) and, separately, switches mouse/touch events (because window width and interaction types are two differents things!).
+Cross is a responsive navigation menu which lets define the thresholds you want, switches hover/click events according to menu state (reduced or extended) *depending on window width* and, separately, switches mouse/touch events *depending on interaction type* (because window width and interaction types are two different things!).
 
 ## Demo
 
@@ -91,7 +91,7 @@ Cross is a responsive navigation menu which lets define the thresholds you want,
 		// toggle menu button element (string or jQuery object)
 		button: '#Burger',
 
-		// device type ['desktop', 'tablet' or 'mobile'] (string)
+		// both: device type ['desktop', 'tablet' or 'mobile'] (string)
 		device: null,
 
 	});
