@@ -162,16 +162,7 @@
 		<!--
 		device.js [OPTIONAL]
 		Use this to define touch or mouse events handlers right from the page load according to the device detected: without having to wait an user interaction
-		You can use an another device detection.
-		In that case, define yourself the device variable:
-
-		$('[role="menubar"]').cross({
-
-			// device type ('desktop', 'tablet' or 'mobile')
-			device: '',
-
-		});
-
+		You can use an another device detection solution.
 		-->
 		<script src="bower_components/devicejs/lib/device.min.js"></script>
 
@@ -190,10 +181,13 @@
 						long: function() {
 							console.log('after menu has switched to: extensive')
 						},
-						both: function() {
+						all: function() {
 							console.log('after menu has switched (reduced or extensive)')
 						},
 					},
+					both: {
+						touch: device.mobile() || device.tablet()
+					}
 				});
 
 			});
