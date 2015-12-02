@@ -29,9 +29,9 @@
   "_resolution": {
     "type": "version",
     "tag": "0.7.0",
-    "commit": "6cd12b0f93c7b342c3287c4c7791a86d942430e0"
+    "commit": "f35c3ab79231c9c70a3d45519e538f1accc14cdc"
   },
   "_source": "git://github.com/idomusha/both.git",
-  "_target": "~0.7.0",
+  "_target": "~0",
   "_originalSource": "both"
 }

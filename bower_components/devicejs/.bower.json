@@ -21,6 +21,5 @@
   },
   "_source": "git://github.com/matthewhudson/device.js.git",
   "_target": "~0.2.7",
-  "_originalSource": "devicejs",
-  "_direct": true
+  "_originalSource": "devicejs"
 }

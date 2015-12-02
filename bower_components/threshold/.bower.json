@@ -30,9 +30,9 @@
   "_resolution": {
     "type": "version",
     "tag": "0.4.0",
-    "commit": "1b9df06e4fcc9b7cd20b32a84cd5bfb106a5339e"
+    "commit": "c31c671946a71aeb05544223bd2b728178b43468"
   },
   "_source": "git://github.com/idomusha/threshold.git",
-  "_target": "~0.4.0",
+  "_target": "~0",
   "_originalSource": "threshold"
 }

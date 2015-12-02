@@ -1,4 +1,4 @@
-#both
+# both
 
 ## detects in real time user interaction type (mouse, touch or keyboard) and switches linked events
 Because [the user may have touch AND a mouse](http://www.html5rocks.com/en/mobile/touchandmouse/).
@@ -54,7 +54,32 @@ $('.button-blue').on('touchend', function() {
 
 #### After that, all event handlers are added/removed according to the interaction type detected. :)
 
-## You can also grab both using bower:
+5. Override default values [OPTIONAL]:
+
+	```javascript
+	both({
+        
+        // touch screen (true) or not (false)
+        touch: Modernizr.touch,         // default: false
+        
+        // data attribute name (or class name prefix)
+        name: null,                     // default: 'interaction'
+        
+        // data attribute (false) or class (true)
+        class: true,                    // default: false
+             
+	});
+	```
+	
+- **touch** setting allows you to initialize the plugin with a presetted touch device (string) 
+- **name** setting allows you to change the default data attribute name by your own (or class prefix name if **class** is defined as *true*)
+- **class** setting allows you to use a class instead of data attribute
+    
+If you use a device detection solution like [device.js](https://github.com/matthewhudson/device.js) or a touch screen detection like [Modernizr(https://github.com/modernizr/modernizr), you can specify the screen type in **touch** option for not waiting the first tap on touch devices (default: false).
+    
+Set **name** at *null* or *''* and **class** at *true* to deactivate class prefix (override useless Modernizr's 'touch' class which detects touch screens, no interaction type).
+
+## You can also grab *both* using bower:
 ```
     bower install both --save
 ```

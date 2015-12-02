@@ -1,5 +1,5 @@
 /*
- *  threshold - v0.4
+ *  threshold - v0.4.0
  *  manages window width changes
  *  https://github.com/idomusha/threshold
  *
@@ -140,10 +140,12 @@ window.matchMedia || (window.matchMedia = function() {
       var _this = this;
 
       if (_this.settings.class) {
-        var classes = _this.$html.attr('class').split(' ').filter(function(c) {
-          return c.lastIndexOf(_this.settings.name, 0) !== 0;
-        });
-        _this.$html.attr('class', $.trim(classes.join(' ')));
+        if (_this.$html.attr('class') !== undefined) {
+          var classes = _this.$html.attr('class').split(' ').filter(function (c) {
+            return c.lastIndexOf(_this.settings.name, 0) !== 0;
+          });
+          _this.$html.attr('class', $.trim(classes.join(' ')));
+        }
       } else {
         _this.$html.removeAttr('data-' + _this.settings.name);
       }
@@ -176,7 +178,7 @@ window.matchMedia || (window.matchMedia = function() {
           mq += obj[prop][0] !== -1 ? ' and (min-width: ' + obj[prop][0] + ')' : '';
           mq += obj[prop][1] !== -1 ? ' and (max-width: ' + obj[prop][1] + ')' : '';
           if (matchMedia(mq).matches) {
-            console.log('match: ',  _this.state = name);
+            if (this._debug) console.log('match: ',  _this.state = name);
             _this.state = name;
           }
           /*if (_this.width === width) {
@@ -295,16 +297,24 @@ window.matchMedia || (window.matchMedia = function() {
   };
 
   window[ pluginName ].defaults = {
+
+    // breakpoints (minimum: 2)
     ranges: {
       'x-large': ['1600px', -1],      // '1480px'
       large: ['1440px', '1599px'],    // '1360px'
       medium: ['1280px', '1439px'],   // '1220px'
       small: ['960px', '1279px'],     // '920px'
-      'x-small': ['760px', '959px'],  //'740px',
-      mobile: [-1,'759px'],           //'100%',
+      'x-small': ['760px', '959px'],  // '740px',
+      mobile: [-1,'759px'],           // '100%',
     },
+
+    // data attribute name (or class name prefix)
     name: 'window',
+
+    // data attribute (false) or class (true)
     class: false,
+
+    // debug mode
     debug: false,
   };
 
