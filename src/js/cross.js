@@ -38,35 +38,26 @@
       ];
 
       // init interaction types manager plugin
-      if (_this.devices.indexOf(_this.settings.device) > -1) {
+      if (_this.settings.both.touch) {
         both({
-          device: _this.settings.device,
+          touch: _this.settings.both.touch,
+          name: _this.settings.both.name,
+          class: _this.settings.both.class,
         });
       } else {
-        if (device.tablet()) {
-          both({
-            device: 'tablet',
-          });
-
-          $('meta[name="viewport"]').attr('content', 'width=920');
-        } else if (device.mobile()) {
-          both({
-            device: 'mobile',
-          });
-
-          $('meta[name="viewport"]').attr('content', 'width=device-width, initial-scale=1.0');
-        } else {
-          both();
-        }
+        both({
+          name: _this.settings.both.name,
+          class: _this.settings.both.class,
+        });
       }
 
       _this.buildCache();
 
       // init media-queries manager plugin
       threshold({
-        name: _this.settings.name,
-        ranges: _this.settings.ranges,
-        class: _this.settings.class,
+        ranges: _this.settings.threshold.ranges,
+        name: _this.settings.threshold.name,
+        class: _this.settings.threshold.class,
       });
 
       // touch actions
@@ -359,8 +350,8 @@
           _this.settings.after.short.call(_this);
         }
 
-        if (typeof _this.settings.after.both === 'function') {
-          _this.settings.after.both.call(_this);
+        if (typeof _this.settings.after.all === 'function') {
+          _this.settings.after.all.call(_this);
         }
       });
 
@@ -374,8 +365,8 @@
           _this.settings.after.long.call(_this);
         }
 
-        if (typeof _this.settings.after.both === 'function') {
-          _this.settings.after.both.call(_this);
+        if (typeof _this.settings.after.all === 'function') {
+          _this.settings.after.all.call(_this);
         }
       });
 
@@ -472,21 +463,24 @@
 
   $.fn[ pluginName ].defaults = {
 
-    // threshold: breakpoints (minimum: 2)
-    ranges: {
-      'x-large': ['1600px', -1],      // '1480px'
-      large: ['1440px', '1599px'],    // '1360px'
-      medium: ['1280px', '1439px'],   // '1220px'
-      small: ['960px', '1279px'],     // '920px'
-      'x-small': ['760px', '959px'],  // '740px',
-      mobile: [-1,'759px'],           // '100%',
+    threshold: {
+
+      // [threshold] breakpoints (minimum: 2)
+      ranges: {
+        'x-large': ['1600px', -1],      // '1480px'
+        large: ['1440px', '1599px'],    // '1360px'
+        medium: ['1280px', '1439px'],   // '1220px'
+        small: ['960px', '1279px'],     // '920px'
+        'x-small': ['760px', '959px'],  // '740px',
+        mobile: [-1, '759px'],           // '100%',
+      },
+
+      // [threshold] data attribute name (or class name prefix)
+      name: 'window',
+
+      // [threshold] data attribute (false) or class (true)
+      class: false,
     },
-
-    // threshold: data attribute name (or class name prefix)
-    name: 'width',						        // default: 'window'
-
-    // threshold: data attribute (false) or class (true)
-    class: true,						          // default: false
 
     // breakpoint(s) name(s) when short menu is activated
     short: [
@@ -507,14 +501,24 @@
       init: null,
       short: null,
       long: null,
-      both: null,
+      all: null,
     },
 
     // toggle menu button element (string or jQuery object)
     button: '#toggleNav',
 
-    // device type ('desktop', 'tablet' or 'mobile')
-    device: null,
+    both: {
+
+      // [both] touch screen (true) or not (false)
+      touch: false,
+
+      // [both] data attribute name (or class name prefix)
+      name: 'interaction',
+
+      // [both] data attribute (false) or class (true)
+      class: false,
+
+    },
 
     // debug mode
     debug: false,

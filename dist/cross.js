@@ -106,8 +106,8 @@
         4: 'mouse',
       };*/
 
-      if (_this._debug) console.log('device:', _this.settings.device);
-      if (_this.settings.device == 'mobile' || _this.settings.device == 'tablet') {
+      if (_this._debug) console.log('touch screen:', _this.settings.touch);
+      if (_this.settings.touch) {
         _this.set('touch', true);
       } else {
         _this.set('mouse', true);
@@ -294,11 +294,28 @@
       if (_this._debug) console.log('types:', _this.types);
       if (_this._debug) console.log('inputs:', _this.active.input);
       if (_this._debug) console.log('keys:', _this.active.key);
-      _this.$html.attr('data-interaction', _this.active.type);
 
       if (_this.settings.class) {
-        $('html').removeClass('mouse touch keyboard');
-        $('html').addClass(_this.active.type);
+        if (_this.settings.name) {
+          if (_this.$html.attr('class') !== undefined) {
+            var classes = _this.$html.attr('class').split(' ').filter(function(c) {
+              return c.lastIndexOf(_this.settings.name, 0) !== 0;
+            });
+
+            _this.$html.attr('class', $.trim(classes.join(' ')));
+          }
+
+          _this.$html.addClass(_this.settings.name + '-' + _this.active.type);
+        } else {
+          $('html').removeClass('mouse touch keyboard');
+          _this.$html.addClass(_this.active.type);
+        }
+      } else {
+        if (_this.settings.name) {
+          _this.$html.attr('data-' + _this.settings.name, _this.active.type);
+        } else {
+          _this.$html.attr('data-' + _this.defaults.name, _this.active.type);
+        }
       }
     },
 
@@ -424,7 +441,7 @@
           selector: _this.handlersData[type][i]['selector'],
           event: _this.handlersData[type][i]['event'],
           handler: _this.handlersData[type][i]['handler'],
-        }
+        };
         _handlerData.selector.on(_handlerData.event, _handlerData.handler);
       }
     },
@@ -528,35 +545,6 @@
 
   });
 
-  /*window[ pluginName ] = function(options) {
-    var args = arguments;
-
-    if (options === undefined || typeof options === 'object') {
-      if (!$.data(window, pluginName)) {
-        $.data(window, pluginName, new Plugin(options));
-      }
-
-    } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
-
-      var returns;
-
-      this.each(function() {
-        var instance = $.data(this, pluginName);
-
-        if (instance instanceof Plugin && typeof instance[options] === 'function') {
-
-          returns = instance[options].apply(instance, Array.prototype.slice.call(args, 1));
-        }
-
-        if (options === 'destroy') {
-          $.data(this, pluginName, null);
-        }
-      });
-
-      return returns !== undefined ? returns : this;
-    }
-  };*/
-
   window[ pluginName ] = function(options) {
     if (!$.data(window, pluginName)) {
       $.data(window, pluginName, new Plugin(options));
@@ -565,21 +553,24 @@
 
   window[ pluginName ].defaults = {
 
-    // desktop, tablet, mobile
-    device: '',
+    // touch screen (true) or not (false)
+    touch: false,
 
-    //interval: 200,
+    // data attribute name (or class name prefix)
+    name: 'interaction',
 
-    // adds class in addition to the data-attribute
-    // to override Modernizr's classes (Modernizr has a useless 'touch' class positive for touch screens)
+    // data attribute (false) or class (true)
     class: false,
+
+    // debug mode
     debug: false,
+
   };
 
 })(jQuery, window, document);
 
 /*
- *  threshold - v0.4
+ *  threshold - v0.4.0
  *  manages window width changes
  *  https://github.com/idomusha/threshold
  *
@@ -720,10 +711,12 @@ window.matchMedia || (window.matchMedia = function() {
       var _this = this;
 
       if (_this.settings.class) {
-        var classes = _this.$html.attr('class').split(' ').filter(function(c) {
-          return c.lastIndexOf(_this.settings.name, 0) !== 0;
-        });
-        _this.$html.attr('class', $.trim(classes.join(' ')));
+        if (_this.$html.attr('class') !== undefined) {
+          var classes = _this.$html.attr('class').split(' ').filter(function (c) {
+            return c.lastIndexOf(_this.settings.name, 0) !== 0;
+          });
+          _this.$html.attr('class', $.trim(classes.join(' ')));
+        }
       } else {
         _this.$html.removeAttr('data-' + _this.settings.name);
       }
@@ -756,7 +749,7 @@ window.matchMedia || (window.matchMedia = function() {
           mq += obj[prop][0] !== -1 ? ' and (min-width: ' + obj[prop][0] + ')' : '';
           mq += obj[prop][1] !== -1 ? ' and (max-width: ' + obj[prop][1] + ')' : '';
           if (matchMedia(mq).matches) {
-            console.log('match: ',  _this.state = name);
+            if (this._debug) console.log('match: ',  _this.state = name);
             _this.state = name;
           }
           /*if (_this.width === width) {
@@ -875,16 +868,24 @@ window.matchMedia || (window.matchMedia = function() {
   };
 
   window[ pluginName ].defaults = {
+
+    // breakpoints (minimum: 2)
     ranges: {
       'x-large': ['1600px', -1],      // '1480px'
       large: ['1440px', '1599px'],    // '1360px'
       medium: ['1280px', '1439px'],   // '1220px'
       small: ['960px', '1279px'],     // '920px'
-      'x-small': ['760px', '959px'],  //'740px',
-      mobile: [-1,'759px'],           //'100%',
+      'x-small': ['760px', '959px'],  // '740px',
+      mobile: [-1,'759px'],           // '100%',
     },
+
+    // data attribute name (or class name prefix)
     name: 'window',
+
+    // data attribute (false) or class (true)
     class: false,
+
+    // debug mode
     debug: false,
   };
 
@@ -930,35 +931,26 @@ window.matchMedia || (window.matchMedia = function() {
       ];
 
       // init interaction types manager plugin
-      if (_this.devices.indexOf(_this.settings.device) > -1) {
+      if (_this.settings.both.touch) {
         both({
-          device: _this.settings.device,
+          touch: _this.settings.both.touch,
+          name: _this.settings.both.name,
+          class: _this.settings.both.class,
         });
       } else {
-        if (device.tablet()) {
-          both({
-            device: 'tablet',
-          });
-
-          $('meta[name="viewport"]').attr('content', 'width=920');
-        } else if (device.mobile()) {
-          both({
-            device: 'mobile',
-          });
-
-          $('meta[name="viewport"]').attr('content', 'width=device-width, initial-scale=1.0');
-        } else {
-          both();
-        }
+        both({
+          name: _this.settings.both.name,
+          class: _this.settings.both.class,
+        });
       }
 
       _this.buildCache();
 
       // init media-queries manager plugin
       threshold({
-        name: _this.settings.name,
-        ranges: _this.settings.ranges,
-        class: _this.settings.class,
+        ranges: _this.settings.threshold.ranges,
+        name: _this.settings.threshold.name,
+        class: _this.settings.threshold.class,
       });
 
       // touch actions
@@ -1251,8 +1243,8 @@ window.matchMedia || (window.matchMedia = function() {
           _this.settings.after.short.call(_this);
         }
 
-        if (typeof _this.settings.after.both === 'function') {
-          _this.settings.after.both.call(_this);
+        if (typeof _this.settings.after.all === 'function') {
+          _this.settings.after.all.call(_this);
         }
       });
 
@@ -1266,8 +1258,8 @@ window.matchMedia || (window.matchMedia = function() {
           _this.settings.after.long.call(_this);
         }
 
-        if (typeof _this.settings.after.both === 'function') {
-          _this.settings.after.both.call(_this);
+        if (typeof _this.settings.after.all === 'function') {
+          _this.settings.after.all.call(_this);
         }
       });
 
@@ -1364,21 +1356,24 @@ window.matchMedia || (window.matchMedia = function() {
 
   $.fn[ pluginName ].defaults = {
 
-    // threshold: breakpoints (minimum: 2)
-    ranges: {
-      'x-large': ['1600px', -1],      // '1480px'
-      large: ['1440px', '1599px'],    // '1360px'
-      medium: ['1280px', '1439px'],   // '1220px'
-      small: ['960px', '1279px'],     // '920px'
-      'x-small': ['760px', '959px'],  // '740px',
-      mobile: [-1,'759px'],           // '100%',
+    threshold: {
+
+      // [threshold] breakpoints (minimum: 2)
+      ranges: {
+        'x-large': ['1600px', -1],      // '1480px'
+        large: ['1440px', '1599px'],    // '1360px'
+        medium: ['1280px', '1439px'],   // '1220px'
+        small: ['960px', '1279px'],     // '920px'
+        'x-small': ['760px', '959px'],  // '740px',
+        mobile: [-1, '759px'],           // '100%',
+      },
+
+      // [threshold] data attribute name (or class name prefix)
+      name: 'window',
+
+      // [threshold] data attribute (false) or class (true)
+      class: false,
     },
-
-    // threshold: data attribute name (or class name prefix)
-    name: 'width',						        // default: 'window'
-
-    // threshold: data attribute (false) or class (true)
-    class: true,						          // default: false
 
     // breakpoint(s) name(s) when short menu is activated
     short: [
@@ -1399,14 +1394,24 @@ window.matchMedia || (window.matchMedia = function() {
       init: null,
       short: null,
       long: null,
-      both: null,
+      all: null,
     },
 
     // toggle menu button element (string or jQuery object)
     button: '#toggleNav',
 
-    // device type ('desktop', 'tablet' or 'mobile')
-    device: null,
+    both: {
+
+      // [both] touch screen (true) or not (false)
+      touch: false,
+
+      // [both] data attribute name (or class name prefix)
+      name: 'interaction',
+
+      // [both] data attribute (false) or class (true)
+      class: false,
+
+    },
 
     // debug mode
     debug: false,
