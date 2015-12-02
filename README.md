@@ -86,7 +86,7 @@
 			long: function() {
 				console.log('after menu has switched to: extensive')
 			},                              // default: null
-			both: function() {
+			all: function() {
 				console.log('after menu has switched (reduced or extensive)')
 			},                              // default: null
 		}
