@@ -1,6 +1,6 @@
 {
   "name": "cross",
-  "version": "0.6.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/idomusha/cross",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
   "dependencies": {
     "jquery": ">=1.7",
     "both": "~0",
-    "threshold": "~0",
+    "threshold": "~1",
     "devicejs": "~0.2.7"
   }
 }
