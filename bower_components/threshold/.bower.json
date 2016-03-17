@@ -1,6 +1,6 @@
 {
   "name": "threshold",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/idomusha/threshold",
   "repository": {
     "type": "git",
@@ -26,13 +26,13 @@
     "jquery": ">=1.7",
     "matchMedia": "matchmedia#~0.2.0"
   },
-  "_release": "0.4.0",
+  "_release": "1.0.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.4.0",
-    "commit": "c31c671946a71aeb05544223bd2b728178b43468"
+    "tag": "1.0.0",
+    "commit": "6075064770ee40ed814611e5c35940e0540b0903"
   },
   "_source": "git://github.com/idomusha/threshold.git",
-  "_target": "~0",
+  "_target": "~1",
   "_originalSource": "threshold"
 }

@@ -1,0 +1,246 @@
+/**
+ * ==========================================================================
+ * COLOR
+ * ========================================================================== */
+
+header .website-title{
+  text-align: center;
+  padding: 10px 15px 15px;
+  color: #000;
+  strong {
+    display: block;
+    font-size: 50px;
+    line-height: 1em;
+  }
+  span {
+    display: block;
+    font-size: 25px;
+    line-height: 1em;
+  }
+}
+@media @screen-max-medium {
+  header .website-title{
+    text-align: left;
+  }
+}
+@media @screen-x-small {
+  header [role="menubar"].secondary {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+@media @screen-max-mobile {
+  header .website-title{
+    text-align: center;
+    padding: 5px 0 10px;
+    strong {
+      font-size: 30px;
+    }
+    span {
+      font-size: 15px;
+    }
+  }
+}
+
+[role="navigation"] {
+  @media @screen-max-mobile {
+    padding-top: 40px;
+  }  
+}
+
+[role="menubar"] {
+  header &{
+    background-color: #5b162d;
+    text-align: center;
+    > [role="presentation"] > [role="menuitem"] {
+      color: #fff;
+    }
+    &.tertiary {
+      .search-box {
+        font-size: 0;
+      }
+      input,
+      select,
+      button[type="submit"] {
+        height: 40px;
+        line-height: 38px;
+        margin: 0 5px;
+        display: inline-block;
+        vertical-align: top;
+        font-weight: 300;
+        font-size: 14px;
+        font-size: 1.4rem;
+        font-family: @font-roboto;
+      }
+      input {
+        padding: 0 5px;
+        margin-right: 0;
+        border: 1px solid #ebebeb;
+      }
+      select {
+        min-width: 40px;
+        border: 1px solid #ebebeb;
+      }
+      button[type="submit"] {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #66abbd;
+        background-color: #66abbd;
+        color: #fff;
+        font-weight: 700;
+        margin: 0;
+        cursor: pointer;
+      }
+    }
+    @media @screen-min-x-small {
+      &.secondary {
+        position: absolute;
+        top: -60px;
+        right: 294px;
+        background-color: transparent;
+        > [role="presentation"] > [role="menuitem"] {
+          color: #000;
+        }
+      }
+      &.tertiary {
+        position: absolute;
+        top: -60px;
+        right: 0;
+        background-color: transparent;
+        margin: 10px;
+      }
+    }
+    @media @screen-x-small {
+      &.secondary {
+        top: -95px;
+        right: 10px;
+        [role="menuitem"] {
+          padding: 0.5rem 1.5rem;
+        }
+      }
+    }
+    @media @screen-max-mobile {
+      &.tertiary {
+        .search {
+          position: absolute;
+          top: 0;
+          left: 0;
+          .search-box {
+            input {
+              width: 220px;
+              margin: 0;
+              font-size: 2.4rem;
+            }
+            button {
+              font-size: 2.4rem;
+            }
+          }
+        }
+        .lang {
+          select {
+            margin: 0;
+            background-color: #ce86bb;
+            text-align: left;
+            padding: @padding-small 3.5rem;
+            color: #fff;
+            width: 260px;
+            border: 0 none;
+            border-bottom: 1px solid @color-grey-light;
+            font-weight: 600;
+            font-size: 2.4rem;
+          }
+        }
+      }
+    }
+  }
+ 
+}
+
+@media @screen-max-large {
+  [role="menubar"] {
+    header & {
+      background-color: #722c49;
+    }
+  }
+}
+
+@media @screen-max-medium {
+  [role="menubar"] {
+    header & {
+      background-color: #894366;
+    }
+  }
+}
+
+@media @screen-max-small {
+  [role="menubar"] {
+    header & {
+      background-color: #a05982;
+    }
+  }
+}
+
+@media @screen-max-x-small {
+  [role="menubar"] {
+    header & {
+      background-color: #b7709f;
+    }
+  }
+}
+
+@media @screen-max-mobile {
+  [role="navigation"] {
+    header & {
+      background-color: #ce86bb;
+    }
+  }
+  [role="menubar"] {
+    header & {
+      background-color: transparent;
+    }
+  }
+}
+[class*="show-"] {
+  display: none;
+  color: #fff;
+  padding: 10px;
+  margin: 0 auto;
+  font-size: 22px;
+}
+
+@media @screen-x-large {
+  .show-x-large {
+    display: inline-block;
+  }
+}
+
+@media @screen-large {
+  .show-large {
+    display: inline-block;
+  }
+}
+
+@media @screen-medium {
+  .show-medium {
+    display: inline-block;
+  }
+}
+
+@media @screen-small {
+  .show-small {
+    display: inline-block;
+  }
+}
+
+@media @screen-x-small {
+  .show-x-small {
+    display: inline-block;
+  }
+}
+
+@media @screen-mobile {
+  .show-mobile {
+    display: inline-block;
+  }
+}

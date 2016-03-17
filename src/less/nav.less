@@ -43,7 +43,7 @@
   margin: 0;
   padding: @padding-small;
   border: 0 none;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 14px;
   font-size: 1.4rem;
   line-height: 1em;
@@ -121,12 +121,12 @@
     height: 3px;
     margin-top: -1px;
     margin-left: -16px;
-
+    
     position: absolute;
     top: 50%;
     left: 50%;
 
-    background: #000;
+    background-color: #000;
 
     transition: 0.2s cubic-bezier(0.770, 0.000, 0.175, 1.000);
   }
@@ -159,7 +159,7 @@
   .toggle{
     display: block;
   }
-  [role="menubar"] {
+  [role="navigation"] {
     z-index: @zindex-offcanvas;
     position: fixed;
     top: 0;
@@ -169,30 +169,34 @@
     min-height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    //background-color: rgba(255,255,255, 0.85);
     display: block;
-    background-color: #fff;
-    background-color: rgba(255, 255, 255, 0.95);
-    > [role="presentation"] {
-      display: block;
-      [role="menuitem"] {
-        text-align: left;
-        padding: @padding-small 4rem;
-        font-weight: 600;
-        font-size: 2.4rem;
-        line-height: 1em;
-        font-family: @font-roboto;
-      }
-      >  [role="menuitem"] {
-        border-bottom: 1px solid @color-grey-light;
-      }
+   
+    [role="menubar"] {
+      width: 260px;
+      > [role="presentation"] {
+        display: block;
+        [role="menuitem"] {
+          text-align: left;
+          padding: @padding-small 4rem;
+          font-weight: 600;
+          font-size: 2.4rem;
+          line-height: 1em;
+          font-family: @font-roboto;
+        }
+        >  [role="menuitem"] {
+          width: 260px;
+          border-bottom: 1px solid @color-grey-light;
+        }
+      } 
     }
     [role="menu"] {
       position: relative;
       border: 0 none;
       border-bottom: 1px solid @color-grey-light;
+      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.95);
       [role="presentation"] [role="menuitem"] {
-        font-weight: 100;
+        font-weight: 300;
         font-size: 1.8rem;
         line-height: 1em;
         font-family: @font-roboto;
@@ -200,12 +204,12 @@
     }
   }
   header[role="banner"] .header-top,
-  [role="menubar"].off-canvas {
+  [role="navigation"].off-canvas {
     transition: transform 0.3s ease;
   }
   .menu-on{
     header[role="banner"] .header-top,
-    [role="menubar"].off-canvas {
+    [role="navigation"].off-canvas {
       transform: translate3d(260px, 0, 0);
     }
   }

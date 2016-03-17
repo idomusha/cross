@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		
 		<title>cross - multi-device navigation menu</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
 		<link href="dist/cross.css" rel="stylesheet">
 		<link href="dist/demo.css" rel="stylesheet">
 	</head>
@@ -19,33 +22,33 @@
 					<strong>cross</strong>
 					<span>multi-device navigation menu</span>
 				</h1>
-				<nav role="navigation" itemscope itemtype="http://www.schema.org/SiteNavigationElement"  class="width-auto width-fixed">
+				<nav role="navigation" itemscope itemtype="http://www.schema.org/SiteNavigationElement"  class="width-auto width-fixed off-canvas">
 					<!-- TODO
                     aria-activedescendant value corresponds to the id of the active menuitem
                     ex:
                     <ul role="menubar" aria-label="Menu Bar" aria-activedescendant="menuitem-1-submenu-1" class="off-canvas">
                     [...]
-                    <button type="button" role="menuitem" aria-selected="true" aria-haspopup="true" id="menuitem-1">
+                    <button type="button" role="menuitem" aria-selected="true" aria-haspopup="true" id="menu-1-menuitem-1">
                     -->
-					<ul role="menubar" aria-label="Menu Bar" class="off-canvas">
+					<ul role="menubar" aria-label="Menu Bar" class="primary">
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-1">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-1">
 								<span>Menu 1</span>
 							</button>
-							<ul role="menu" aria-labelledby="menuitem-1" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-1" aria-expanded="false" hidden>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-1-submenu-1">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-1-submenu-1">
 										<span>Submenu 1</span>
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-1-submenu-2">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-1-submenu-2">
 										<span>Submenu 2</span>
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-1-submenu-3">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-1-submenu-3">
 										<span>Submenu 3</span>
 									</a>
 								</li>
@@ -53,24 +56,24 @@
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-2">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-2">
 								<span>Menu 2</span>
 							</button>
-							<ul role="menu" aria-labelledby="menuitem-2" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-2" aria-expanded="false" hidden>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-2-submenu-1">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-2-submenu-1">
 										<span>Submenu 1</span>
 										<small>lorem ipsum</small>
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-2-submenu-2">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-2-submenu-2">
 										<span>Submenu 2</span>
 										<small>lorem ipsoum</small>
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-2-submenu-3">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-2-submenu-3">
 										<span>Submenu 3</span>
 										<small>lorem ipsum</small>
 									</a>
@@ -79,17 +82,17 @@
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-3">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-3">
 								<span>Menu 3</span>
 							</button>
-							<ul role="menu" aria-labelledby="menuitem-3" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-3" aria-expanded="false" hidden>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-3-submenu-1">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-3-submenu-1">
 										<span>Submenu 1</span>
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-3-submenu-2">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-3-submenu-2">
 										<span>Submenu 2</span>
 									</a>
 								</li>
@@ -97,22 +100,22 @@
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-4">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-4">
 								<span>Menu 4</span>
 							</button>
-							<ul role="menu" aria-labelledby="menuitem-4" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-4" aria-expanded="false" hidden>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-4-submenu-1">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-4-submenu-1">
 										<span>Submenu 1</span>
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-4-submenu-2">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-4-submenu-2">
 										<span>Submenu 2</span>
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-4-submenu-3">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-4-submenu-3">
 										<span>Submenu 3</span>
 									</a>
 								</li>
@@ -120,37 +123,78 @@
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menuitem-5">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-5">
 								<span>Menu 5</span>
 							</button>
-							<ul role="menu" aria-labelledby="menuitem-5" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-5" aria-expanded="false" hidden>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-5-submenu-1">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-5-submenu-1">
 										<span>Submenu 1</span>
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-5-submenu-2">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-5-submenu-2">
 										<span>Submenu 2</span>
 									</a>
 								</li>
 								<li role="presentation">
-									<a href="#_" role="menuitem" aria-selected="false" id="menuitem-5-submenu-3">
+									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-5-submenu-3">
 										<span>Submenu 3</span>
 									</a>
 								</li>
 							</ul><!-- //menu -->
 						</li>
 					</ul>
+					<ul role="menubar" aria-label="Menu Bar" class="secondary">
+						<li role="presentation">
+							<!-- using button to be triggered on-click -->
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-2-menuitem-1">
+								<span>Link 1</span>
+							</button>
+						</li>
+						<li role="presentation">
+							<!-- using button to be triggered on-click -->
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-2-menuitem-2">
+								<span>Link 2</span>
+							</button>
+						</li>
+						<li role="presentation">
+							<!-- using button to be triggered on-click -->
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-2-menuitem-3">
+								<span>Link 3</span>
+							</button>
+						</li>
+					</ul>
+					<ul role="menubar" aria-label="Menu Bar" class="tertiary">
+						<li role="presentation" class="lang">
+							<!-- using button to be triggered on-click -->
+							<select>
+								<option data-href="http://http://idomusha.github.io/cross/?EN">EN</option>
+								<option data-href="http://idomusha.github.io/cross/?FR">FR</option>
+							</select>
+						</li>
+						<li role="presentation" class="search">
+							<form role="search" class="search-box">
+								<input type="search" placeholder="search">
+								<button type="submit" class="button">OK</button>
+							</form>
+						</li>
+					</ul>
 				</nav>
 
 			</div>
 		</header>
-		<div class="width-full">
+		<main class="width-full">
 			<div class="width-fixed" id="console">
-				&nbsp
+				
+				<p>✓ switch mouse/touch events according to user interaction type (in real time).</p>
+				<p>✓ if interaction type is mouse: switch mouse events on click events for menu items when nav is burger menu.</p>
+				<p>✓ if interaction type is touch: menu items toggle with touch events.</p>
+				<p>✓ you can define several width ranges (minimum: 2) and associate one or more ranges to the short menu and one or more ranges to the long menu.</p>
+				<p>✓ you can use callbacks when menu changes (after short menu, after long menu or after both: short and long).</p>
+				
 			</div>
-		</div>
+		</main>
 		<footer class="width-full">
 			<div class="width-fixed">
 				&nbsp

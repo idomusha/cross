@@ -261,7 +261,7 @@ h6 {
   margin: 0;
   padding: 1.5rem;
   border: 0 none;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 14px;
   font-size: 1.4rem;
   line-height: 1em;
@@ -338,7 +338,7 @@ h6 {
   position: absolute;
   top: 50%;
   left: 50%;
-  background: #000;
+  background-color: #000;
   -webkit-transition: 0.2s cubic-bezier(0.77, 0, 0.175, 1);
           transition: 0.2s cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -370,11 +370,11 @@ h6 {
 .toggle.opened .toggle-bar {
   opacity: 0;
 }
-@media screen and (max-width:739px) {
+@media screen and (max-width:759px) {
   .toggle {
     display: block;
   }
-  [role="menubar"] {
+  [role="navigation"] {
     z-index: 5;
     position: fixed;
     top: 0;
@@ -385,13 +385,14 @@ h6 {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: block;
-    background-color: #fff;
-    background-color: rgba(255, 255, 255, 0.95);
   }
-  [role="menubar"] > [role="presentation"] {
+  [role="navigation"] [role="menubar"] {
+    width: 260px;
+  }
+  [role="navigation"] [role="menubar"] > [role="presentation"] {
     display: block;
   }
-  [role="menubar"] > [role="presentation"] [role="menuitem"] {
+  [role="navigation"] [role="menubar"] > [role="presentation"] [role="menuitem"] {
     text-align: left;
     padding: 1.5rem 4rem;
     font-weight: 600;
@@ -399,27 +400,30 @@ h6 {
     line-height: 1em;
     font-family: 'Roboto', sans-serif;
   }
-  [role="menubar"] > [role="presentation"] > [role="menuitem"] {
+  [role="navigation"] [role="menubar"] > [role="presentation"] > [role="menuitem"] {
+    width: 260px;
     border-bottom: 1px solid #d3d3d3;
   }
-  [role="menubar"] [role="menu"] {
+  [role="navigation"] [role="menu"] {
     position: relative;
     border: 0 none;
     border-bottom: 1px solid #d3d3d3;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.95);
   }
-  [role="menubar"] [role="menu"] [role="presentation"] [role="menuitem"] {
-    font-weight: 100;
+  [role="navigation"] [role="menu"] [role="presentation"] [role="menuitem"] {
+    font-weight: 300;
     font-size: 1.8rem;
     line-height: 1em;
     font-family: 'Roboto', sans-serif;
   }
   header[role="banner"] .header-top,
-  [role="menubar"].off-canvas {
+  [role="navigation"].off-canvas {
     -webkit-transition: -webkit-transform 0.3s ease;
             transition: transform 0.3s ease;
   }
   .menu-on header[role="banner"] .header-top,
-  .menu-on [role="menubar"].off-canvas {
+  .menu-on [role="navigation"].off-canvas {
     -webkit-transform: translate3d(260px, 0, 0);
             transform: translate3d(260px, 0, 0);
   }

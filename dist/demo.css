@@ -141,8 +141,9 @@ body {
   color: #373737;
   margin: 0;
   padding: 0;
+  background-color: #ccc;
 }
-@media screen and (max-width:739px) {
+@media screen and (max-width:759px) {
   html {
     font-size: 40%;
     font-size: calc(1em * 0.4);
@@ -183,13 +184,38 @@ a.link-unobtrusive {
 header {
   min-height: 60px;
 }
+header .width-fixed {
+  background-color: #fff;
+}
+/**
+ * ==========================================================================
+ * HEADER
+ * ========================================================================== */
+main .width-fixed {
+  height: calc(100vh - 240px);
+  background-color: #f7f7f7;
+  padding: 30px 15px;
+}
+@media screen and (max-width:759px) {
+  main .width-fixed {
+    height: calc(100vh - 140px);
+  }
+}
+/**
+ * ==========================================================================
+ * HEADER
+ * ========================================================================== */
+footer .width-fixed {
+  height: 80px;
+  background-color: #333;
+}
 /**
  * ==========================================================================
  * COLOR
  * ========================================================================== */
 header .website-title {
   text-align: center;
-  padding: 10px 0 15px;
+  padding: 10px 15px 15px;
   color: #000;
 }
 header .website-title strong {
@@ -202,8 +228,21 @@ header .website-title span {
   font-size: 25px;
   line-height: 1em;
 }
-@media screen and (max-width:739px) {
+@media screen and (max-width:1439px) {
   header .website-title {
+    text-align: left;
+  }
+}
+@media screen and (min-width:760px) and (max-width:959px) {
+  header [role="menubar"].secondary {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+@media screen and (max-width:759px) {
+  header .website-title {
+    text-align: center;
     padding: 5px 0 10px;
   }
   header .website-title strong {
@@ -213,12 +252,106 @@ header .website-title span {
     font-size: 15px;
   }
 }
+@media screen and (max-width:759px) {
+  [role="navigation"] {
+    padding-top: 40px;
+  }
+}
 header [role="menubar"] {
   background-color: #5b162d;
   text-align: center;
 }
 header [role="menubar"] > [role="presentation"] > [role="menuitem"] {
   color: #fff;
+}
+header [role="menubar"].tertiary .search-box {
+  font-size: 0;
+}
+header [role="menubar"].tertiary input,
+header [role="menubar"].tertiary select,
+header [role="menubar"].tertiary button[type="submit"] {
+  height: 40px;
+  line-height: 38px;
+  margin: 0 5px;
+  display: inline-block;
+  vertical-align: top;
+  font-weight: 300;
+  font-size: 14px;
+  font-size: 1.4rem;
+  font-family: 'Roboto', sans-serif;
+}
+header [role="menubar"].tertiary input {
+  padding: 0 5px;
+  margin-right: 0;
+  border: 1px solid #ebebeb;
+}
+header [role="menubar"].tertiary select {
+  min-width: 40px;
+  border: 1px solid #ebebeb;
+}
+header [role="menubar"].tertiary button[type="submit"] {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #66abbd;
+  background-color: #66abbd;
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+  cursor: pointer;
+}
+@media screen and (min-width:760px) {
+  header [role="menubar"].secondary {
+    position: absolute;
+    top: -60px;
+    right: 294px;
+    background-color: transparent;
+  }
+  header [role="menubar"].secondary > [role="presentation"] > [role="menuitem"] {
+    color: #000;
+  }
+  header [role="menubar"].tertiary {
+    position: absolute;
+    top: -60px;
+    right: 0;
+    background-color: transparent;
+    margin: 10px;
+  }
+}
+@media screen and (min-width:760px) and (max-width:959px) {
+  header [role="menubar"].secondary {
+    top: -95px;
+    right: 10px;
+  }
+  header [role="menubar"].secondary [role="menuitem"] {
+    padding: 0.5rem 1.5rem;
+  }
+}
+@media screen and (max-width:759px) {
+  header [role="menubar"].tertiary .search {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  header [role="menubar"].tertiary .search .search-box input {
+    width: 220px;
+    margin: 0;
+    font-size: 2.4rem;
+  }
+  header [role="menubar"].tertiary .search .search-box button {
+    font-size: 2.4rem;
+  }
+  header [role="menubar"].tertiary .lang select {
+    margin: 0;
+    background-color: #ce86bb;
+    text-align: left;
+    padding: 1.5rem 3.5rem;
+    color: #fff;
+    width: 260px;
+    border: 0 none;
+    border-bottom: 1px solid #d3d3d3;
+    font-weight: 600;
+    font-size: 2.4rem;
+  }
 }
 @media screen and (max-width:1599px) {
   header [role="menubar"] {
@@ -240,9 +373,12 @@ header [role="menubar"] > [role="presentation"] > [role="menuitem"] {
     background-color: #b7709f;
   }
 }
-@media screen and (max-width:739px) {
-  header [role="menubar"] {
+@media screen and (max-width:759px) {
+  header [role="navigation"] {
     background-color: #ce86bb;
+  }
+  header [role="menubar"] {
+    background-color: transparent;
   }
 }
 [class*="show-"] {
@@ -272,12 +408,12 @@ header [role="menubar"] > [role="presentation"] > [role="menuitem"] {
     display: inline-block;
   }
 }
-@media screen and (min-width:740px) and (max-width:959px) {
+@media screen and (min-width:760px) and (max-width:959px) {
   .show-x-small {
     display: inline-block;
   }
 }
-@media screen and (max-width:739px) {
+@media screen and (max-width:759px) {
   .show-mobile {
     display: inline-block;
   }

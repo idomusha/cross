@@ -88,8 +88,8 @@
       _this.documentTouchend = function(event) {
         if (_this.dragging) return;
         if (this._debug) console.log('--------------- >>> touchend document');
-
-        if (!$(event.target).closest(_this.$nav).length && _this.$html.hasClass('menu-on') && !$(event.target).closest(_this.$button).length) {
+        
+        if (!$(event.target).closest($(_this.element)).length && _this.$html.hasClass('menu-on') && !$(event.target).closest(_this.$button).length) {
           _this.$button.trigger('click');
         }
 
@@ -145,7 +145,7 @@
       _this.documentClick = function(event) {
         if (this._debug) console.log('--------------- >>> click document');
 
-        if (!$(event.target).closest(_this.$nav).length && _this.$html.hasClass('menu-on') && !$(event.target).closest(_this.$button).length) {
+        if (!$(event.target).closest($(_this.element)).length && _this.$html.hasClass('menu-on') && !$(event.target).closest(_this.$button).length) {
           _this.$button.trigger('click');
         }
 
@@ -483,18 +483,10 @@
     },
 
     // breakpoint(s) name(s) when short menu is activated
-    short: [
-      'mobile',
-    ],
+    short: 'mobile',
 
     // breakpoint(s) name(s) when long menu is activated
-    long: [
-      'x-large',
-      'large',
-      'medium',
-      'small',
-      'x-small',
-    ],
+    long: 'x-small|small|medium|large|x-large',
 
     // after menu state change (function)
     after: {

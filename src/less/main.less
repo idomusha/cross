@@ -3,9 +3,13 @@
  * HEADER
  * ========================================================================== */
 
-header {
-  min-height: 60px;
+main {
   .width-fixed {
-    background-color: #fff;
+    height: calc(100vh - 240px);
+    background-color: #f7f7f7;
+    padding: 30px 15px;
+    @media @screen-max-mobile {
+      height: calc(100vh - 140px);
+    }
   }
 }
