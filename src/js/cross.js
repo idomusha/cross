@@ -170,7 +170,7 @@
       _this.document = $(document.documentElement);;
       _this.window = $(window);
       _this.$html = $('html');
-      _this.$nav = $(_this.element).children('[role="menubar"]');
+      _this.$nav = $(_this.element).find('[role="menubar"]');
       _this.$button = Private.define(_this.settings.button);
       _this.$collapsibleMenuItems = _this.$nav
 				.children('[role="presentation"]')
