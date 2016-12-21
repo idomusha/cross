@@ -246,7 +246,7 @@ h6 {
       }*/
 }
 [role="menubar"] > [role="presentation"] > [role="menuitem"][aria-selected="true"] span::after,
-[role="menubar"] > [role="presentation"] > [role="menuitem"].expanded span::after {
+[role="menubar"] > [role="presentation"] > [role="menuitem"][aria-expanded="true"] span::after {
   background-color: #bd1220;
 }
 [role="menubar"] > [role="presentation"] [role="menu"] [role="menuitem"][aria-selected="true"] span {

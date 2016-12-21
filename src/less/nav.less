@@ -26,7 +26,7 @@
     }
     @color-active: @color-red-fireEngine;
     > [role="menuitem"][aria-selected="true"] span::after,
-    > [role="menuitem"].expanded span::after {
+    > [role="menuitem"][aria-expanded="true"] span::after {
       background-color: @color-active;
     }
     [role="menu"] [role="menuitem"][aria-selected="true"] span {
@@ -121,7 +121,7 @@
     height: 3px;
     margin-top: -1px;
     margin-left: -16px;
-    
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -170,7 +170,7 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: block;
-   
+
     [role="menubar"] {
       width: 260px;
       > [role="presentation"] {
@@ -187,7 +187,7 @@
           width: 260px;
           border-bottom: 1px solid @color-grey-light;
         }
-      } 
+      }
     }
     [role="menu"] {
       position: relative;

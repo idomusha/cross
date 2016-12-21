@@ -67,11 +67,12 @@
 
         var $this = element;
         var $submenu = $this.next('[role="menu"]');
-        _this.$collapsibleMenuItems.removeClass('expanded');
+        _this.$collapsibleMenuItems.attr('aria-expanded', 'false');
         if (!$submenu.attr('hidden')) {
           $submenu.attr('hidden', true);
         } else {
-          $this.addClass('expanded');
+          $this.attr('aria-expanded', 'true');
+          $this.focus();
           _this.$collapsibleMenuItems.next('[role="menu"]').attr('hidden', true);
           $submenu.removeAttr('hidden');
         }
@@ -88,15 +89,15 @@
       _this.documentTouchend = function(event) {
         if (_this.dragging) return;
         if (this._debug) console.log('--------------- >>> touchend document');
-        
+
         if (!$(event.target).closest($(_this.element)).length && _this.$html.hasClass('menu-on') && !$(event.target).closest(_this.$button).length) {
           _this.$button.trigger('click');
         }
 
-        if (!_this.$collapsibleMenuItems.hasClass('expanded')) return;
+        if (_this.$collapsibleMenuItems.attr('aria-expanded') === 'false') return;
         if ($(event.target).parents('[role="menubar"]').length == 0) {
           if (this._debug) console.log('>>> close menuitems');
-          _this.$collapsibleMenuItems.removeClass('expanded').next('[role="menu"]').attr('hidden', true);
+          _this.$collapsibleMenuItems.attr('aria-expanded', 'false').next('[role="menu"]').attr('hidden', true);
         }
 
       };
@@ -110,7 +111,8 @@
         var $submenu = _this.$currentMenuItem.next('[role="menu"]');
 
         function slideDown() {
-          _this.$currentMenuItem.addClass('expanded');
+          _this.$currentMenuItem.attr('aria-expanded', 'true');
+          _this.$currentMenuItem.focus();
           $submenu.removeAttr('hidden');
         }
 
@@ -133,7 +135,7 @@
         }, 0);
 
         clearTimeout(_this.delayBeforeSlideDown);
-        _this.$collapsibleMenuItems.removeClass('expanded').next('[role="menu"]').attr('hidden', true);
+        _this.$collapsibleMenuItems.attr('aria-expanded', 'false').next('[role="menu"]').attr('hidden', true);
       };
 
       _this.navMouseleave = function() {
@@ -193,7 +195,7 @@
 
         _this.$button.on('click' + '.' + _this._name, function() {
           if (this._debug) console.log('~~~~~~~~~~~ ' + _this.$button + ' click');
-          _this.$collapsibleMenuItems.removeClass('expanded').next('[role="menu"]').attr('hidden', true);
+          _this.$collapsibleMenuItems.attr('aria-expanded', 'false').next('[role="menu"]').attr('hidden', true);
           _this.$html.toggleClass('menu-on');
           _this.$button.toggleClass('opened');
         });

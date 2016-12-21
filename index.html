@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		
+
 		<title>cross - multi-device navigation menu</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +36,7 @@
 							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-1">
 								<span>Menu 1</span>
 							</button>
-							<ul role="menu" aria-labelledby="menu-1-menuitem-1" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-1" hidden>
 								<li role="presentation">
 									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-1-submenu-1">
 										<span>Submenu 1</span>
@@ -59,7 +59,7 @@
 							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-2">
 								<span>Menu 2</span>
 							</button>
-							<ul role="menu" aria-labelledby="menu-1-menuitem-2" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-2" hidden>
 								<li role="presentation">
 									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-2-submenu-1">
 										<span>Submenu 1</span>
@@ -85,7 +85,7 @@
 							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-3">
 								<span>Menu 3</span>
 							</button>
-							<ul role="menu" aria-labelledby="menu-1-menuitem-3" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-3" hidden>
 								<li role="presentation">
 									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-3-submenu-1">
 										<span>Submenu 1</span>
@@ -103,7 +103,7 @@
 							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-4">
 								<span>Menu 4</span>
 							</button>
-							<ul role="menu" aria-labelledby="menu-1-menuitem-4" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-4" hidden>
 								<li role="presentation">
 									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-4-submenu-1">
 										<span>Submenu 1</span>
@@ -126,7 +126,7 @@
 							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-1-menuitem-5">
 								<span>Menu 5</span>
 							</button>
-							<ul role="menu" aria-labelledby="menu-1-menuitem-5" aria-expanded="false" hidden>
+							<ul role="menu" aria-labelledby="menu-1-menuitem-5" hidden>
 								<li role="presentation">
 									<a href="#_" role="menuitem" aria-selected="false" id="menu-1-menuitem-5-submenu-1">
 										<span>Submenu 1</span>
@@ -148,19 +148,19 @@
 					<ul role="menubar" aria-label="Menu Bar" class="secondary">
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-2-menuitem-1">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="false" id="menu-2-menuitem-1">
 								<span>Link 1</span>
 							</button>
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-2-menuitem-2">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="false" id="menu-2-menuitem-2">
 								<span>Link 2</span>
 							</button>
 						</li>
 						<li role="presentation">
 							<!-- using button to be triggered on-click -->
-							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="true" id="menu-2-menuitem-3">
+							<button type="button" role="menuitem" aria-selected="false" aria-haspopup="false" id="menu-2-menuitem-3">
 								<span>Link 3</span>
 							</button>
 						</li>
@@ -186,13 +186,13 @@
 		</header>
 		<main class="width-full">
 			<div class="width-fixed" id="console">
-				
+
 				<p>✓ switch mouse/touch events according to user interaction type (in real time).</p>
 				<p>✓ if interaction type is mouse: switch mouse events on click events for menu items when nav is burger menu.</p>
 				<p>✓ if interaction type is touch: menu items toggle with touch events.</p>
 				<p>✓ you can define several width ranges (minimum: 2) and associate one or more ranges to the short menu and one or more ranges to the long menu.</p>
 				<p>✓ you can use callbacks when menu changes (after short menu, after long menu or after both: short and long).</p>
-				
+
 			</div>
 		</main>
 		<footer class="width-full">
